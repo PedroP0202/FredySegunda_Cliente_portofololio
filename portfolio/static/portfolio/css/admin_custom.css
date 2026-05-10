@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Outfit:wght@300;400;500&display=swap');
+
+/* Apply custom fonts and strictly black background */
+body {
+    font-family: 'Outfit', sans-serif !important;
+    background-color: #0d0d0d !important;
+    color: #fff !important;
+}
+
+h1, h2, h3, h4, h5, h6, .brand-text, .site-header, .login-logo {
+    font-family: 'Syne', sans-serif !important;
+}
+
+/* Ensure sidebar, header, and wrappers also use the pure dark theme */
+.main-sidebar, .main-header, .content-wrapper, .card {
+    background-color: #0d0d0d !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Customize primary buttons to match the frontend blue */
+.btn-primary, .bg-primary, .badge-primary {
+    background-color: #4C75EE !important;
+    border-color: #4C75EE !important;
+    border-radius: 100px !important; /* Pills style */
+}
+
+.btn-primary:hover {
+    background-color: #3b5bcc !important;
+}
+
+/* Sidebar styling to match the theme */
+.nav-sidebar .nav-link.active, .nav-pills .nav-link.active {
+    background-color: #4C75EE !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+}
+
+/* Inputs and forms */
+.form-control {
+    background-color: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #fff !important;
+}
+
+.form-control:focus {
+    border-color: #4C75EE !important;
+}
+
+/* Footer / Header border blending */
+.main-header.navbar {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+}
+.main-footer {
+    background-color: #0d0d0d !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.07) !important;
+}
