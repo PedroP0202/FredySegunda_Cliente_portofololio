@@ -1,4 +1,6 @@
 from django.db import models
+import cloudinary.models
+
 
 class GeneralSetting(models.Model):
     # Hero Section
@@ -18,8 +20,14 @@ class GeneralSetting(models.Model):
     contact_email = models.EmailField(default="fredy.segunda@email.com", verbose_name="Email de Contacto")
     link_instagram = models.URLField(blank=True, null=True, default="#", verbose_name="Link Instagram")
     link_linkedin = models.URLField(blank=True, null=True, default="#", verbose_name="Link LinkedIn")
-    cv_file = models.FileField(upload_to='cv_files/', blank=True, null=True, verbose_name="Ficheiro do CV (PDF)")
-
+    cv_file = cloudinary.models.CloudinaryField(
+        'cv_files', 
+        blank=True, 
+        null=True, 
+        verbose_name="Ficheiro do CV (PDF)",
+        resource_type='raw'  # para PDFs e ficheiros não-imagem
+    )
+    
     class Meta:
         verbose_name = "Configuração Geral"
         verbose_name_plural = "Configurações Gerais"
@@ -31,6 +39,9 @@ class GeneralSetting(models.Model):
         # Enforce singleton
         self.pk = 1
         super(GeneralSetting, self).save(*args, **kwargs)
+        
+    
+
 
 class Tool(models.Model):
     name = models.CharField(max_length=50, verbose_name="Ferramenta")
@@ -75,7 +86,11 @@ class Project(models.Model):
     section = models.CharField(max_length=20, choices=SECTION_CHOICES, verbose_name="Secção no Site")
     order = models.PositiveIntegerField(default=0, verbose_name="Ordem de Exibição")
     
-    media_file = models.FileField(upload_to='projects_media/', verbose_name="Ficheiro (Imagem/Vídeo)")
+    media_file = cloudinary.models.CloudinaryField(
+        'projects_media',
+        verbose_name="Ficheiro (Imagem/Vídeo)",
+        resource_type='auto'  # detecta automaticamente imagem ou vídeo
+    )
     is_video = models.BooleanField(default=False, verbose_name="É vídeo?")
 
     class Meta:
