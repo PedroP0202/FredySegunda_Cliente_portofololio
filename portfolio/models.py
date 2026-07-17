@@ -21,12 +21,11 @@ class GeneralSetting(models.Model):
     link_instagram = models.URLField(blank=True, null=True, default="#", verbose_name="Link Instagram")
     link_linkedin = models.URLField(blank=True, null=True, default="#", verbose_name="Link LinkedIn")
     cv_file = cloudinary.models.CloudinaryField(
-        'cv_files', 
-        blank=True, 
-        null=True, 
-        verbose_name="Ficheiro do CV (PDF)",
-        resource_type='raw'  # para PDFs e ficheiros não-imagem
-    )
+    'Ficheiro do CV (PDF)',    # ← isto JÁ É o verbose_name
+    blank=True,
+    null=True,
+    resource_type='raw'
+)
     
     class Meta:
         verbose_name = "Configuração Geral"
@@ -87,10 +86,9 @@ class Project(models.Model):
     order = models.PositiveIntegerField(default=0, verbose_name="Ordem de Exibição")
     
     media_file = cloudinary.models.CloudinaryField(
-        'projects_media',
-        verbose_name="Ficheiro (Imagem/Vídeo)",
-        resource_type='auto'  # detecta automaticamente imagem ou vídeo
-    )
+    'Ficheiro (Imagem/Vídeo)',  # ← isto JÁ É o verbose_name
+    resource_type='auto'
+)
     is_video = models.BooleanField(default=False, verbose_name="É vídeo?")
 
     class Meta:
