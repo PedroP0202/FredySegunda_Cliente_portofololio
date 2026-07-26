@@ -26,6 +26,16 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+
+  <!-- ── STUDIO THEME CUSTOMIZATION FROM ADMIN ── -->
+  <style>
+    :root {
+      --bg: {{ setting.get_effective_bg|default:"#08080c" }};
+      {% if setting.accent_color %}
+      --blue: {{ setting.accent_color }};
+      {% endif %}
+    }
+  </style>
 </head>
 <body>
 
@@ -39,12 +49,53 @@
   <div class="cursor"></div>
   <div class="cursor-follower"></div>
 
+  <!-- ── FLOATING GLASS SOCIAL DOCK (STRATEGIC SIDEBAR / BOTTOM) ── -->
+  <aside class="floating-social-dock" aria-label="Canais de Comunicação Rápida">
+    {% if setting.link_behance and setting.link_behance != "#" %}
+      <a href="{{ setting.link_behance }}" target="_blank" rel="noopener noreferrer" class="dock-icon" aria-label="Behance">
+        <i class="ti ti-brand-behance"></i>
+        <span class="dock-tooltip">Behance</span>
+      </a>
+    {% endif %}
+    {% if setting.link_dribbble and setting.link_dribbble != "#" %}
+      <a href="{{ setting.link_dribbble }}" target="_blank" rel="noopener noreferrer" class="dock-icon" aria-label="Dribbble">
+        <i class="ti ti-brand-dribbble"></i>
+        <span class="dock-tooltip">Dribbble</span>
+      </a>
+    {% endif %}
+    {% if setting.link_instagram and setting.link_instagram != "#" %}
+      <a href="{{ setting.link_instagram }}" target="_blank" rel="noopener noreferrer" class="dock-icon" aria-label="Instagram">
+        <i class="ti ti-brand-instagram"></i>
+        <span class="dock-tooltip">Instagram</span>
+      </a>
+    {% endif %}
+    {% if setting.link_linkedin and setting.link_linkedin != "#" %}
+      <a href="{{ setting.link_linkedin }}" target="_blank" rel="noopener noreferrer" class="dock-icon" aria-label="LinkedIn">
+        <i class="ti ti-brand-linkedin"></i>
+        <span class="dock-tooltip">LinkedIn</span>
+      </a>
+    {% endif %}
+    {% if setting.whatsapp_number %}
+      <a href="https://wa.me/{{ setting.whatsapp_number }}" target="_blank" rel="noopener noreferrer" class="dock-icon dock-icon-wa" aria-label="WhatsApp Chat">
+        <i class="ti ti-brand-whatsapp"></i>
+        <span class="dock-tooltip">WhatsApp</span>
+      </a>
+    {% endif %}
+    <a href="#contacto" class="dock-icon" aria-label="Enviar Email">
+      <i class="ti ti-mail"></i>
+      <span class="dock-tooltip">Contacto</span>
+    </a>
+  </aside>
+
   <!-- ── MOBILE NAV OVERLAY ── -->
   <div class="nav-mobile" aria-label="Menu Mobile">
-    <a class="nav-link" href="#trabalho">Trabalho</a>
-    <a class="nav-link" href="#galeria">Galeria</a>
+    <a class="nav-link" href="#trabalho">Showcase</a>
+    <a class="nav-link" href="#galeria">Criações</a>
+    {% for custom_gal in custom_galleries %}
+      <a class="nav-link" href="#gal-{{ custom_gal.id }}">{{ custom_gal.name|truncatewords:2 }}</a>
+    {% endfor %}
     <a class="nav-link" href="#reel">Reel</a>
-    <a class="nav-link" href="#skills">Competências</a>
+    <a class="nav-link" href="#skills">Stack</a>
     <a class="nav-link" href="#contacto">Contacto</a>
   </div>
 
@@ -52,11 +103,29 @@
   <nav>
     <a href="#inicio" class="logo">Fredy<span>.</span>Segunda</a>
     <div class="nav-right">
-      <a class="nav-link" href="#trabalho">Trabalho</a>
-      <a class="nav-link" href="#galeria">Galeria</a>
+      <a class="nav-link" href="#trabalho">Showcase</a>
+      <a class="nav-link" href="#galeria">Criações</a>
+      {% for custom_gal in custom_galleries %}
+        <a class="nav-link" href="#gal-{{ custom_gal.id }}">{{ custom_gal.name|truncatewords:2 }}</a>
+      {% endfor %}
       <a class="nav-link" href="#reel">Reel</a>
-      <a class="nav-link" href="#skills">Competências</a>
+      <a class="nav-link" href="#skills">Stack</a>
       <a class="nav-link" href="#contacto">Contacto</a>
+
+      <!-- Quick Social Icons on Header -->
+      <div class="nav-socials" aria-label="Redes no Topo">
+        {% if setting.link_behance and setting.link_behance != "#" %}
+          <a href="{{ setting.link_behance }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn" title="Behance">
+            <i class="ti ti-brand-behance"></i>
+          </a>
+        {% endif %}
+        {% if setting.link_dribbble and setting.link_dribbble != "#" %}
+          <a href="{{ setting.link_dribbble }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn" title="Dribbble">
+            <i class="ti ti-brand-dribbble"></i>
+          </a>
+        {% endif %}
+      </div>
+
       <a href="#contacto" class="nav-dot-wrap" title="Status de Agenda &amp; Colaborações">
         {% if setting.is_available or setting.is_available is None %}
           <div class="nav-dot"></div>
@@ -102,7 +171,7 @@
           <span class="hero-title-inner">Marcas que</span>
         </span>
         <span class="hero-title-line">
-          <span class="hero-title-inner blue">{% if setting.hero_title %}{{ setting.hero_title|safe }}{% else %}ficam{% endif %}</span>
+          <span class="hero-title-inner blue" style="color:var(--blue);">{% if setting.hero_title %}{{ setting.hero_title|safe }}{% else %}ficam{% endif %}</span>
         </span>
         <span class="hero-title-line">
           <span class="hero-title-inner">na memória.</span>
@@ -112,7 +181,7 @@
       <!-- Meta info row -->
       <div class="hero-meta" id="hero-meta">
         <div class="hero-meta-item">
-          <span class="pill">{{ setting.hero_year|default:"2026" }}</span>
+          <span class="pill" style="background:rgba(76,117,238,0.2); color:var(--blue-light);">{{ setting.hero_year|default:"2026" }}</span>
           Direção Criativa &amp; Branding
         </div>
         <div class="hero-meta-sep" aria-hidden="true"></div>
@@ -138,6 +207,30 @@
         {% else %}
           <a href="#contacto" class="btn-sec">
             <i class="ti ti-mail"></i> Entrar em Contacto
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- STRATEGIC HERO SOCIAL STRIP (NEW) -->
+      <div class="hero-social-row gsap-reveal" aria-label="Redes de Design em Destaque">
+        {% if setting.link_behance and setting.link_behance != "#" %}
+          <a href="{{ setting.link_behance }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
+            <i class="ti ti-brand-behance"></i> Behance <span style="opacity:0.5;">↗</span>
+          </a>
+        {% endif %}
+        {% if setting.link_dribbble and setting.link_dribbble != "#" %}
+          <a href="{{ setting.link_dribbble }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
+            <i class="ti ti-brand-dribbble"></i> Dribbble <span style="opacity:0.5;">↗</span>
+          </a>
+        {% endif %}
+        {% if setting.link_instagram and setting.link_instagram != "#" %}
+          <a href="{{ setting.link_instagram }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
+            <i class="ti ti-brand-instagram"></i> Instagram <span style="opacity:0.5;">↗</span>
+          </a>
+        {% endif %}
+        {% if setting.link_linkedin and setting.link_linkedin != "#" %}
+          <a href="{{ setting.link_linkedin }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
+            <i class="ti ti-brand-linkedin"></i> LinkedIn <span style="opacity:0.5;">↗</span>
           </a>
         {% endif %}
       </div>
@@ -319,7 +412,7 @@
       <span class="sec-tag">Ilustração &amp; Design Gráfico</span>
       <h2 class="sec-title">Galeria de Criações</h2>
     </div>
-    <span class="sec-sub">Série Completa &amp; Exploracão de Conceitos</span>
+    <span class="sec-sub">Série Completa &amp; Exploração de Conceitos</span>
   </div>
 
   <div class="gallery-grid">
@@ -395,9 +488,99 @@
   </div>
 
   <!-- ══════════════════════════════════════════════════
+       GALERIAS TEMÁTICAS PERSONALIZADAS (DYNAMICE SETS)
+       ══════════════════════════════════════════════════ -->
+  {% for custom_gal in custom_galleries %}
+    <div class="sec-header" id="gal-{{ custom_gal.id }}" style="margin-top: 5rem;">
+      <div class="sec-title-wrap">
+        <span class="sec-tag">{{ custom_gal.tag|default:"Coleção Exclusiva" }}</span>
+        <h2 class="sec-title">{{ custom_gal.name }}</h2>
+      </div>
+      {% if custom_gal.description %}
+        <p class="sec-sub" style="max-width: 500px; font-size: 0.95rem; line-height: 1.5; color: var(--text-muted);">{{ custom_gal.description }}</p>
+      {% endif %}
+    </div>
+
+    {% if custom_gal.layout_style == 'grid3' %}
+      <div class="gallery-grid">
+        {% for proj in custom_gal.projects.all %}
+          <div class="proj-card gsap-reveal"
+            data-media-url="{{ proj.media_file.url }}"
+            data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
+            onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
+
+            <div class="card-media">
+              {% if proj.is_video %}
+                <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
+              {% else %}
+                <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title }}">
+              {% endif %}
+              <div class="media-zoom-overlay">
+                <div class="play-ring"><i class="ti ti-zoom-in" style="font-size:18px; color:#fff;"></i></div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="card-meta">
+                <span class="card-category">{{ proj.category|default:"Galeria Especial" }}</span>
+                {% if proj.client_name %}<span style="font-size:0.68rem; color:var(--text-dim);">{{ proj.client_name }}</span>{% endif %}
+              </div>
+              <h4 class="card-title">
+                {{ proj.title|default:"Obra Selecionada" }}
+                <i class="ti ti-arrow-up-right card-title-arrow"></i>
+              </h4>
+              <p class="card-desc">{{ proj.description|default:"Projeto pertencente a esta coleção exclusiva do estúdio." }}</p>
+            </div>
+
+          </div>
+        {% empty %}
+          <p style="padding: 0 3.5rem; color: var(--text-dim); font-style: italic;">Ainda sem obras vinculadas a esta galeria específica no painel Admin.</p>
+        {% endfor %}
+      </div>
+
+    {% else %}
+      <div class="gallery-asym-grid">
+        {% for proj in custom_gal.projects.all %}
+          <div class="proj-card gsap-reveal"
+            data-media-url="{{ proj.media_file.url }}"
+            data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
+            onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
+
+            <div class="card-media {% if forloop.first or forloop.counter0|divisibleby:3 %}card-media-asym-large{% else %}card-media-asym-small{% endif %}">
+              {% if proj.is_video %}
+                <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
+              {% else %}
+                <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title }}">
+              {% endif %}
+              <div class="media-zoom-overlay">
+                <div class="play-ring"><i class="ti ti-zoom-in" style="font-size:20px; color:#fff;"></i></div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="card-meta">
+                <span class="card-category">{{ proj.category|default:"Destaque Temático" }}</span>
+              </div>
+              <h4 class="card-title" style="font-size:1.3rem;">
+                {{ proj.title|default:"Peça Conceitual" }}
+                <i class="ti ti-arrow-up-right card-title-arrow"></i>
+              </h4>
+              <p class="card-desc">{{ proj.description }}</p>
+            </div>
+
+          </div>
+        {% empty %}
+          <p style="padding: 0 3.5rem; color: var(--text-dim); font-style: italic;">Galeria assimétrica sem obras atribuídas ainda.</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  {% endfor %}
+
+  <!-- ══════════════════════════════════════════════════
        REEL — MOTION & VÍDEO CINEMÁTICO
        ══════════════════════════════════════════════════ -->
-  <section class="reel-section" id="reel">
+  <section class="reel-section" id="reel" style="margin-top: 4rem;">
     <div class="reel-header">
       <div class="sec-title-wrap">
         <span class="sec-tag">Animação &amp; Dinamismo</span>
@@ -581,7 +764,8 @@
       tl.to('#hero-meta',        { opacity: 1, y: 0, duration: 0.8 }, 1.05);
       tl.to('#hero-desc',        { opacity: 1, y: 0, duration: 0.8 }, 1.2);
       tl.to('#hero-cta',         { opacity: 1, y: 0, duration: 0.8 }, 1.35);
-      tl.to('#hero-stats',       { opacity: 1, y: 0, duration: 0.8 }, 1.5);
+      tl.to('.hero-social-row',  { opacity: 1, y: 0, duration: 0.8 }, 1.45);
+      tl.to('#hero-stats',       { opacity: 1, y: 0, duration: 0.8 }, 1.55);
 
       gsap.utils.toArray('.gsap-reveal').forEach(function(el) {
         gsap.fromTo(el, { opacity: 0, y: 45 }, {

@@ -991,3 +991,196 @@ footer {
   .reel-strip { grid-template-columns: 1fr; }
   .card-media, .showcase-media { min-height: 240px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   STRATEGIC SOCIAL CHANNELS & CUSTOM THEMES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Floating Glass Social Dock (Left Edge) ── */
+.floating-social-dock {
+  position: fixed;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+  background: rgba(14, 14, 20, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65), 0 0 30px rgba(76, 117, 238, 0.15);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.floating-social-dock:hover {
+  border-color: rgba(124, 157, 255, 0.4);
+  transform: translateY(-50%) scale(1.02);
+}
+
+.dock-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-size: 1.3rem;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.dock-icon:hover {
+  background: var(--blue);
+  border-color: var(--blue-light);
+  color: #fff;
+  transform: translateX(4px) scale(1.1);
+  box-shadow: 0 0 20px rgba(76, 117, 238, 0.6);
+}
+
+.dock-icon-wa:hover {
+  background: #22c55e !important;
+  border-color: #4ade80 !important;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.6) !important;
+}
+
+.dock-tooltip {
+  position: absolute;
+  left: 54px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-8px);
+  background: #111117;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.dock-icon:hover .dock-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ── 2. Top Navbar Social Icons ── */
+.nav-socials {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 0.6rem;
+  margin-right: 0.2rem;
+}
+
+.nav-soc-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+}
+
+.nav-soc-btn:hover {
+  background: rgba(76,117,238,0.18);
+  border-color: var(--blue-light);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ── 3. Hero Social Row ── */
+.hero-social-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 1.8rem;
+  z-index: 10;
+}
+
+.hero-soc-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 50px;
+  background: rgba(18, 18, 25, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all 0.3s ease;
+}
+
+.hero-soc-pill i {
+  font-size: 1.15rem;
+  color: var(--blue-light);
+}
+
+.hero-soc-pill:hover {
+  background: rgba(76, 117, 238, 0.15);
+  border-color: var(--blue-light);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(76, 117, 238, 0.25);
+}
+
+/* ── Mobile Adaptation for Dock ── */
+@media (max-width: 992px) {
+  .floating-social-dock {
+    left: 12px;
+    padding: 6px;
+    gap: 8px;
+  }
+  .dock-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+  .dock-tooltip {
+    display: none;
+  }
+  .nav-socials {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-social-dock {
+    top: auto;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    border-radius: 50px;
+    padding: 8px 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(76,117,238,0.3);
+  }
+  .floating-social-dock:hover {
+    transform: translateX(-50%) scale(1.02);
+  }
+  .dock-icon:hover {
+    transform: translateY(-3px) scale(1.1);
+  }
+}
+

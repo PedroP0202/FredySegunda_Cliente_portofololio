@@ -108,6 +108,7 @@ JAZZMIN_SETTINGS = {
         "auth.user": "fas fa-user-lock",
         "auth.Group": "fas fa-users",
         "portfolio.GeneralSetting": "fas fa-sliders-h",
+        "portfolio.CustomGallery": "fas fa-th-large",
         "portfolio.Project": "fas fa-palette",
         "portfolio.Tool": "fas fa-vector-square",
         "portfolio.CreativeStep": "fas fa-layer-group",

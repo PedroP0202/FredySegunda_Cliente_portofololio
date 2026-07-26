@@ -3,6 +3,26 @@ import cloudinary.models
 
 
 class GeneralSetting(models.Model):
+    BG_THEMES = [
+        ('obsidian', '■ Obsidiana Profundo (Preto Puro Studio #08080c)'),
+        ('midnight', '■ Azul Meia-Noite Cinematográfico (#050814)'),
+        ('graphite', '■ Grafite Mineral & Slate (#0f1117)'),
+        ('velvet', '■ Velvet Noir / Púrpura Imperial (#0a0712)'),
+        ('emerald', '■ Esmeralda Noir / Verde Profundo (#040e0a)'),
+        ('custom', '◆ Cor de Fundo Personalizada (Usar campo HEX)'),
+    ]
+    
+    ACCENT_COLORS = [
+        ('#4C75EE', 'Azul Índigo Studio (Padrão)'),
+        ('#2563EB', 'Azul Cobalto Eléctrico'),
+        ('#6366f1', 'Lilás Violeta Vibrante'),
+        ('#8b5cf6', 'Roxo Awwwards Exclusive'),
+        ('#10b981', 'Verde Esmeralda Luminoso'),
+        ('#f59e0b', 'Dourado Âmbar Premium'),
+        ('#f43f5e', 'Rosa Carmim Editorial'),
+        ('#ffffff', 'Branco Puro Monocromático'),
+    ]
+
     # ── 1. SEO & Identidade da Marca ──
     site_title = models.CharField(
         max_length=120, 
@@ -14,7 +34,29 @@ class GeneralSetting(models.Model):
         verbose_name="Descrição SEO para Google e Partilhas"
     )
 
-    # ── 2. Status de Agenda & Disponibilidade ──
+    # ── 2. Personalização do Fundo & Cores (Theme Studio) ──
+    bg_theme = models.CharField(
+        max_length=20, 
+        choices=BG_THEMES, 
+        default='obsidian', 
+        verbose_name="Tema de Fundo do Site"
+    )
+    custom_bg_color = models.CharField(
+        max_length=20, 
+        blank=True, 
+        null=True, 
+        default="#08080c", 
+        verbose_name="Cor HEX Personalizada (Fundo)",
+        help_text="Ex: #0a0b10 (Ativo apenas quando seleciona 'Cor de Fundo Personalizada' acima)"
+    )
+    accent_color = models.CharField(
+        max_length=20, 
+        choices=ACCENT_COLORS, 
+        default='#4C75EE', 
+        verbose_name="Cor de Destaque (Accent/Luzes/Botões)"
+    )
+
+    # ── 3. Status de Agenda & Disponibilidade ──
     is_available = models.BooleanField(
         default=True, 
         verbose_name="Atualmente disponível para Freelance/Novos Projetos?",
@@ -27,7 +69,7 @@ class GeneralSetting(models.Model):
     )
     hero_year = models.CharField(max_length=10, default="2026", verbose_name="Ano em Destaque (Hero/Footer)")
     
-    # ── 3. Apresentação Principal (Hero) ──
+    # ── 4. Apresentação Principal (Hero) ──
     hero_title = models.TextField(
         default="Marcas que<br><span class=\"blue\">ficam</span><br>na memória.", 
         verbose_name="Título Principal do Hero (suporta HTML)"
@@ -44,7 +86,7 @@ class GeneralSetting(models.Model):
         help_text="Ficheiro disponibilizado para download no botão 'Transferir Currículo'"
     )
     
-    # ── 4. Estatísticas de Impacto (Stats) ──
+    # ── 5. Estatísticas de Impacto (Stats) ──
     stat1_number = models.CharField(max_length=10, default="34+", verbose_name="Nº Estatística 1")
     stat1_label = models.CharField(max_length=35, default="Projetos Concluídos", verbose_name="Rótulo Estatística 1")
     stat2_number = models.CharField(max_length=10, default="3", verbose_name="Nº Estatística 2")
@@ -52,7 +94,7 @@ class GeneralSetting(models.Model):
     stat3_number = models.CharField(max_length=10, default="18", verbose_name="Nº Estatística 3")
     stat3_label = models.CharField(max_length=35, default="Clientes Atendidos", verbose_name="Rótulo Estatística 3")
 
-    # ── 5. Canais de Contacto & Redes Sociais ──
+    # ── 6. Canais de Contacto & Redes Sociais Estratégias ──
     contact_email = models.EmailField(default="fredy.segunda@email.com", verbose_name="Email Principal de Contacto")
     whatsapp_number = models.CharField(
         max_length=25, 
@@ -61,13 +103,13 @@ class GeneralSetting(models.Model):
         verbose_name="Número do WhatsApp",
         help_text="Formato internacional com código do país. Ex: +351912345678 (permite conversa direta)"
     )
-    link_behance = models.URLField(blank=True, null=True, default="#", verbose_name="Link Behance (Essencial para Design)")
-    link_dribbble = models.URLField(blank=True, null=True, default="#", verbose_name="Link Dribbble")
+    link_behance = models.URLField(blank=True, null=True, default="#", verbose_name="Link Behance (Exibido no Topo, Hero e Dock Lateral)")
+    link_dribbble = models.URLField(blank=True, null=True, default="#", verbose_name="Link Dribbble (Exibido no Topo e Dock Lateral)")
     link_instagram = models.URLField(blank=True, null=True, default="#", verbose_name="Link Instagram")
     link_linkedin = models.URLField(blank=True, null=True, default="#", verbose_name="Link LinkedIn")
     link_github = models.URLField(blank=True, null=True, verbose_name="Link GitHub / Outro Portfólio")
     
-    # ── 6. Personalização do Bloco de Conversão (CTA Final) ──
+    # ── 7. Personalização do Bloco de Conversão (CTA Final) ──
     cta_title = models.CharField(
         max_length=150, 
         default="Pronto para dar vida ao seu próximo projeto?", 
@@ -80,43 +122,47 @@ class GeneralSetting(models.Model):
     
     class Meta:
         verbose_name = "Configuração Geral & Identidade"
-        verbose_name_plural = "1. Configurações Gerais do Site"
+        verbose_name_plural = "1. Configurações & Personalização"
 
     def __str__(self):
-        return "Configurações Globais — Fredy Segunda Studio"
+        return "Configurações Globais & Temas do Estúdio"
 
     def save(self, *args, **kwargs):
         self.pk = 1
         super(GeneralSetting, self).save(*args, **kwargs)
 
+    def get_effective_bg(self):
+        if self.bg_theme == 'custom' and self.custom_bg_color:
+            return self.custom_bg_color
+        mapping = {
+            'obsidian': '#08080c',
+            'midnight': '#050814',
+            'graphite': '#0f1117',
+            'velvet': '#0a0712',
+            'emerald': '#040e0a',
+        }
+        return mapping.get(self.bg_theme, '#08080c')
 
-class Tool(models.Model):
-    name = models.CharField(max_length=60, verbose_name="Ferramenta / Competência", help_text="Ex: Adobe Illustrator, Branding, Cinema 4D")
-    percentage = models.PositiveIntegerField(verbose_name="Nível de Domínio (0 a 100%)", default=90)
-    order = models.PositiveIntegerField(default=0, verbose_name="Ordem de Exibição", help_text="Menor número aparece primeiro")
+
+class CustomGallery(models.Model):
+    LAYOUT_CHOICES = [
+        ('grid3', '❖ Grelha de 3 Colunas (Cards Editoriais Clássicas)'),
+        ('masonry', '◆ Galeria Assimétrica (Destaques Conceituais/Específicas)'),
+    ]
+    name = models.CharField(max_length=100, verbose_name="Nome da Galeria Específica", help_text="Ex: Série Ilustração Nike, Branding para Hotelaria, Identidade Visual 2026")
+    tag = models.CharField(max_length=60, default="Coleção Especial", verbose_name="Tag Superior (Eyebrow)", help_text="Ex: Coleção Especial, Série Exclusiva, Estudo de Caso")
+    description = models.TextField(blank=True, null=True, verbose_name="Descrição da Galeria", help_text="Breve introdução sobre a curadoria e conceito desta galeria específica.")
+    layout_style = models.CharField(max_length=20, choices=LAYOUT_CHOICES, default='grid3', verbose_name="Estilo Visual na Página")
+    order = models.PositiveIntegerField(default=1, verbose_name="Ordem de Apresentação no Site")
+    is_active = models.BooleanField(default=True, verbose_name="Galeria Ativa no Site?")
 
     class Meta:
         ordering = ['order']
-        verbose_name = "Ferramenta / Competência"
-        verbose_name_plural = "3. Stack de Ferramentas"
+        verbose_name = "Galeria Temática Customizada"
+        verbose_name_plural = "3. Criar Galerias Específicas"
 
     def __str__(self):
-        return f"{self.name} ({self.percentage}%)"
-
-
-class CreativeStep(models.Model):
-    step_number = models.CharField(max_length=10, verbose_name="Número do Passo", help_text="Ex: 01, 02, 03")
-    title = models.CharField(max_length=100, verbose_name="Título da Etapa")
-    description = models.TextField(verbose_name="Descrição Metodológica")
-    order = models.PositiveIntegerField(default=0, verbose_name="Ordem de Exibição")
-
-    class Meta:
-        ordering = ['order']
-        verbose_name = "Etapa de Trabalho"
-        verbose_name_plural = "4. Processo Criativo"
-
-    def __str__(self):
-        return f"Etapa {self.step_number} — {self.title}"
+        return f"{self.name} [{self.get_layout_style_display().split(' (')[0]}]"
 
 
 class Project(models.Model):
@@ -132,13 +178,23 @@ class Project(models.Model):
     category = models.CharField(max_length=60, verbose_name="Categoria / Serviço", blank=True, null=True, help_text="Ex: Identidade Visual, Motion Design, Packaging")
     description = models.TextField(verbose_name="Descrição Narrativa & Desafio", blank=True, null=True, help_text="Texto sempre visível nas novas cards editoriais")
     
-    # Metadados de alto nível para clientes
+    # Metadados do cliente
     client_name = models.CharField(max_length=100, verbose_name="Marca / Cliente", blank=True, null=True, help_text="Ex: Nike, Estúdio Beta, Projeto Conceitual")
     project_year = models.CharField(max_length=10, verbose_name="Ano", blank=True, null=True, default="2026")
     project_url = models.URLField(verbose_name="Link do Projeto (Behance / Site Real)", blank=True, null=True, help_text="Permite que o utilizador aceda ao estudo de caso ao vivo")
     featured_tag = models.CharField(max_length=50, verbose_name="Tag de Destaque", blank=True, null=True, help_text="Ex: Premiado, Em Destaque, Rebrand 2026")
     
     section = models.CharField(max_length=25, choices=SECTION_CHOICES, verbose_name="Secção no Site", default='gallery_small')
+    custom_gallery = models.ForeignKey(
+        CustomGallery,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='projects',
+        verbose_name="Ou alocar a Galeria Específica Criada",
+        help_text="Se selecionar uma de suas galerias customizadas aqui, este trabalho será exposto nela com destaque!"
+    )
+    
     order = models.PositiveIntegerField(default=0, verbose_name="Ordem na Secção", help_text="Define qual aparece primeiro na grelha")
     
     media_file = cloudinary.models.CloudinaryField(
@@ -154,3 +210,32 @@ class Project(models.Model):
 
     def __str__(self):
         return f"[{self.get_section_display().split()[1]}] {self.title or 'Projeto Sem Título'}"
+
+
+class Tool(models.Model):
+    name = models.CharField(max_length=60, verbose_name="Ferramenta / Competência", help_text="Ex: Adobe Illustrator, Branding, Cinema 4D")
+    percentage = models.PositiveIntegerField(verbose_name="Nível de Domínio (0 a 100%)", default=90)
+    order = models.PositiveIntegerField(default=0, verbose_name="Ordem de Exibição", help_text="Menor número aparece primeiro")
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = "Ferramenta / Competência"
+        verbose_name_plural = "4. Stack de Ferramentas"
+
+    def __str__(self):
+        return f"{self.name} ({self.percentage}%)"
+
+
+class CreativeStep(models.Model):
+    step_number = models.CharField(max_length=10, verbose_name="Número do Passo", help_text="Ex: 01, 02, 03")
+    title = models.CharField(max_length=100, verbose_name="Título da Etapa")
+    description = models.TextField(verbose_name="Descrição Metodológica")
+    order = models.PositiveIntegerField(default=0, verbose_name="Ordem de Exibição")
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = "Etapa de Trabalho"
+        verbose_name_plural = "5. Processo Criativo"
+
+    def __str__(self):
+        return f"Etapa {self.step_number} — {self.title}"
