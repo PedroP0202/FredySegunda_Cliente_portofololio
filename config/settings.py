@@ -89,27 +89,31 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Jazzmin (igual ao teu)
+# Jazzmin — Painel Executive Studio
 JAZZMIN_SETTINGS = {
-    "site_title": "Fredy Segunda Portfolio Admin",
-    "site_header": "Fredy Segunda",
-    "site_brand": "Fredy.Segunda Gestão",
-    "welcome_sign": "Bem-vindo ao teu Portefólio! Gere os teus trabalhos aqui.",
-    "copyright": "Fredy Segunda © 2025",
+    "site_title": "Fredy Segunda Studio — Gestão do Portfólio",
+    "site_header": "Fredy Segunda Studio",
+    "site_brand": "Fredy.Segunda Studio",
+    "welcome_sign": "Bem-vindo ao Painel Studio! Gere as tuas obras, clientes e agenda criativa.",
+    "copyright": "Fredy Segunda Studio © 2026",
     "search_model": ["portfolio.Project"],
     "topmenu_links": [
-        {"name": "Ver Site", "url": "home", "new_window": True},
+        {"name": "✦ Ver Site Ao Vivo", "url": "home", "new_window": True},
     ],
     "show_sidebar": True,
     "navigation_expanded": True,
+    "order_with_respect_to": ["portfolio", "auth"],
     "icons": {
-        "auth": "fas fa-users-cog",
-        "auth.user": "fas fa-user-shield",
+        "auth": "fas fa-shield-alt",
+        "auth.user": "fas fa-user-lock",
         "auth.Group": "fas fa-users",
-        "portfolio.Project": "fas fa-briefcase",
+        "portfolio.GeneralSetting": "fas fa-sliders-h",
+        "portfolio.Project": "fas fa-palette",
+        "portfolio.Tool": "fas fa-vector-square",
+        "portfolio.CreativeStep": "fas fa-layer-group",
     },
     "default_icon_parents": "fas fa-chevron-circle-right",
-    "default_icon_children": "fas fa-file",
+    "default_icon_children": "fas fa-dot-circle",
     "custom_css": "portfolio/css/admin_custom.css",
 }
 
