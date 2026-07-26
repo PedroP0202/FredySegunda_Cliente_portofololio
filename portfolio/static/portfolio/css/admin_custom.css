@@ -1,213 +1,159 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Outfit:wght@300;400;500;600&display=swap');
 
 /* ═══════════════════════════════════════════════════════════════
-   FREDY SEGUNDA — CREATIVE STUDIO ADMIN THEME
-   Executive Luxury Dashboard · Linear / Raycast Inspired
+   FREDY SEGUNDA — STUDIO ADMIN REFINEMENT (SLATE THEME)
+   Clean, intuitive, functional studio styling
    ═══════════════════════════════════════════════════════════════ */
 
-:root {
-  --admin-bg: #08080b !important;
-  --admin-surface: #111117 !important;
-  --admin-surface-2: #181822 !important;
-  --admin-border: rgba(255, 255, 255, 0.08) !important;
-  --admin-border-focus: #4C75EE !important;
-  --admin-blue: #4C75EE !important;
-  --admin-blue-hover: #6388F5 !important;
-  --admin-text: #f3f3f6 !important;
-  --admin-text-muted: rgba(243, 243, 246, 0.6) !important;
-}
-
-/* Base Typography & Backgrounds */
-body, .content-wrapper, .main-footer, .main-header, .main-sidebar {
-    font-family: 'Outfit', -apple-system, sans-serif !important;
-    background-color: var(--admin-bg) !important;
-    color: var(--admin-text) !important;
+/* ── Typography & Brand Header ── */
+body, .content-wrapper, .main-footer, .table, .form-control {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
     -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6, .brand-text, .site-header, .card-title, .module h2, .caption {
+h1, h2, h3, h4, h5, h6, .brand-text, .card-title, .module h2, .caption, .nav-header {
     font-family: 'Syne', sans-serif !important;
+    letter-spacing: -0.01em !important;
+}
+
+.brand-link .brand-text {
     font-weight: 700 !important;
-    letter-spacing: -0.01em;
+    font-size: 1.15rem !important;
+    letter-spacing: -0.02em !important;
+    color: #ffffff !important;
 }
 
-/* ── CARDS & PANELS ── */
-.card, .module, .inline-group {
-    background-color: var(--admin-surface) !important;
-    border: 1px solid var(--admin-border) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45) !important;
-    overflow: hidden !important;
-    margin-bottom: 1.8rem !important;
+/* ── Cards & Structure ── */
+.card {
+    border-radius: 10px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
 }
 
-.card-header, .card-footer, .module h2, .inline-group h2 {
-    background: var(--admin-surface-2) !important;
-    border-bottom: 1px solid var(--admin-border) !important;
-    padding: 1rem 1.4rem !important;
-    font-size: 1rem !important;
-    color: #fff !important;
-}
-
-/* ── TABLES & LIST VIEW ── */
-.table, table {
-    background-color: transparent !important;
-    color: var(--admin-text) !important;
-    margin-bottom: 0 !important;
-}
-
-.table thead th, table thead th {
-    background-color: var(--admin-surface-2) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-    color: #9ea4b8 !important;
-    font-size: 0.75rem !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.08em !important;
-    padding: 12px 16px !important;
+.card-header {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
     font-weight: 600 !important;
+    padding: 14px 20px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
-.table tbody tr, table tbody tr {
-    transition: background-color 0.2s ease !important;
-    border-bottom: 1px solid var(--admin-border) !important;
+/* ── Table & Data Lists ── */
+table.table {
+    margin-top: 0 !important;
 }
 
-.table tbody tr:hover, table tbody tr:hover {
-    background-color: rgba(76, 117, 238, 0.08) !important;
+table.table thead th {
+    font-size: 0.78rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    color: #a0aec0 !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 12px 16px !important;
+    vertical-align: middle !important;
 }
 
-.table td, table td {
+table.table tbody tr {
+    transition: background-color 0.15s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+table.table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.035) !important;
+}
+
+table.table tbody td, table.table tbody th {
     padding: 14px 16px !important;
     vertical-align: middle !important;
-    font-size: 0.9rem !important;
+    font-size: 0.94rem !important;
+    color: #e2e8f0 !important;
 }
 
-/* ── BUTTONS & BADGES ── */
-.btn-primary, .bg-primary, .badge-primary, .button.default {
-    background: var(--admin-blue) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    color: #ffffff !important;
+/* ── Thumbnails & Media Preview in List ── */
+.studio-thumb {
+    width: 68px;
+    height: 48px;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.studio-thumb img, .studio-thumb video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.studio-thumb-badge {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    color: #60a5fa;
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ── Buttons & Interactive ── */
+.btn-primary, .button.default {
+    background-color: #3b66f5 !important;
+    border-color: #3b66f5 !important;
+    color: #fff !important;
     font-weight: 500 !important;
-    padding: 8px 18px !important;
-    border-radius: 8px !important;
-    box-shadow: 0 4px 15px rgba(76, 117, 238, 0.35) !important;
-    transition: all 0.25s ease !important;
+    border-radius: 6px !important;
+    padding: 8px 16px !important;
+    transition: all 0.2s ease;
 }
 
 .btn-primary:hover, .button.default:hover {
-    background: var(--admin-blue-hover) !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 6px 20px rgba(76, 117, 238, 0.5) !important;
+    background-color: #2b52d6 !important;
+    border-color: #2b52d6 !important;
+    transform: translateY(-1px);
 }
 
-.btn-secondary, .btn-info, .btn-default {
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    color: var(--admin-text) !important;
-    border-radius: 8px !important;
-    transition: all 0.2s ease !important;
-}
-.btn-secondary:hover, .btn-info:hover, .btn-default:hover {
-    background: rgba(255, 255, 255, 0.09) !important;
-    border-color: #fff !important;
-    color: #fff !important;
+.btn {
+    border-radius: 6px !important;
+    font-weight: 500 !important;
 }
 
-/* ── FORM INPUTS ── */
-.form-control, input[type=text], input[type=email], input[type=url], input[type=number], select, textarea {
-    background-color: var(--admin-surface-2) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    color: #ffffff !important;
-    border-radius: 8px !important;
+/* ── Form Controls & Focus States ── */
+.form-control:focus {
+    border-color: #3b66f5 !important;
+    box-shadow: 0 0 0 3px rgba(59, 102, 245, 0.2) !important;
+}
+
+/* ── Sidebar Navigation ── */
+.nav-sidebar .nav-item .nav-link {
+    border-radius: 6px !important;
+    margin: 2px 10px !important;
     padding: 10px 14px !important;
-    font-size: 0.92rem !important;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-.form-control:focus, input:focus, select:focus, textarea:focus {
-    border-color: var(--admin-blue) !important;
-    box-shadow: 0 0 0 3px rgba(76, 117, 238, 0.22) !important;
-    outline: none !important;
-}
-
-/* ── SIDEBAR STYLING ── */
-.main-sidebar {
-    border-right: 1px solid var(--admin-border) !important;
-    background: rgba(12, 12, 17, 0.95) !important;
-    backdrop-filter: blur(20px) !important;
-}
-
-.brand-link {
-    border-bottom: 1px solid var(--admin-border) !important;
-    padding: 1.2rem 1rem !important;
-    background: #08080b !important;
-}
-
-.brand-text {
-    font-family: 'Syne', sans-serif !important;
-    font-weight: 800 !important;
-    font-size: 1.1rem !important;
-    letter-spacing: -0.01em !important;
+.nav-sidebar .nav-item .nav-link.active {
+    background-color: #3b66f5 !important;
     color: #fff !important;
+    box-shadow: 0 4px 12px rgba(59, 102, 245, 0.3) !important;
 }
 
-.nav-sidebar .nav-item > .nav-link {
-    color: var(--admin-text-muted) !important;
-    border-radius: 8px !important;
-    margin: 3px 10px !important;
-    padding: 10px 14px !important;
-    transition: all 0.2s ease !important;
+.nav-sidebar .nav-item .nav-link:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05) !important;
 }
 
-.nav-sidebar .nav-item > .nav-link:hover {
-    background: rgba(255, 255, 255, 0.04) !important;
-    color: #fff !important;
-}
-
-.nav-sidebar .nav-item > .nav-link.active {
-    background: var(--admin-blue) !important;
-    color: #fff !important;
-    font-weight: 600 !important;
-    box-shadow: 0 4px 16px rgba(76, 117, 238, 0.4) !important;
-}
-
-/* ── BARS & FILTERS ── */
-.main-header.navbar {
-    background: rgba(13, 13, 18, 0.9) !important;
-    backdrop-filter: blur(16px) !important;
-    border-bottom: 1px solid var(--admin-border) !important;
-}
-
-.main-footer {
-    border-top: 1px solid var(--admin-border) !important;
-    font-size: 0.8rem !important;
-    color: #6c7280 !important;
-    padding: 1.2rem 2rem !important;
-}
-
-/* Custom Thumbnail column styling */
-td .thumb-preview {
-    border-radius: 8px;
-    overflow: hidden;
-    display: inline-block;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-}
-
-/* Help text refinement */
+/* Help text formatting */
 .help-block, .form-text, .help {
-    color: #8a90a2 !important;
-    font-size: 0.78rem !important;
+    color: #94a3b8 !important;
+    font-size: 0.8rem !important;
     margin-top: 6px !important;
-    line-height: 1.4 !important;
-}
-
-/* Tabs and Pills */
-.nav-pills .nav-link {
-    border-radius: 8px !important;
-    color: var(--admin-text-muted) !important;
-    padding: 8px 16px !important;
-}
-.nav-pills .nav-link.active {
-    background: var(--admin-blue) !important;
-    color: #fff !important;
 }

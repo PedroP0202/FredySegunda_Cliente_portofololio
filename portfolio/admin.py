@@ -1,33 +1,38 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.utils.html import format_html
 from .models import Project, GeneralSetting, Tool, CreativeStep
+
 
 @admin.register(GeneralSetting)
 class GeneralSettingAdmin(admin.ModelAdmin):
     fieldsets = (
-        ("🌐 1. Identidade do Site & SEO", {
+        ("Identidade da Marca & SEO", {
             "fields": ("site_title", "meta_description"),
-            "description": "Configurações que aparecem na aba do navegador e nos motores de busca (Google)."
+            "description": "Configurações gerais para motores de busca (Google) e cabeçalhos de navegador."
         }),
-        ("🟢 2. Status de Agenda & Disponibilidade", {
+        ("Status de Agenda & Disponibilidade", {
             "fields": ("is_available", "availability_badge_text", "hero_year"),
-            "description": "Controle o indicador verde/vermelho que mostra aos clientes se tem agenda aberta para novos trabalhos."
+            "description": "Controle em tempo real se o indicador luminoso no topo do site exibe agenda disponível ou em projeto."
         }),
-        ("📢 3. Secção Principal (Hero Showcase)", {
+        ("Apresentação Principal (Hero)", {
             "fields": ("hero_title", "hero_desc", "cv_file"),
-            "description": "A frase de impacto inicial, a descrição introdutória e o ficheiro de currículo para download."
+            "description": "Textos de introdução ao seu trabalho e ficheiro para download do currículo."
         }),
-        ("📊 4. Estatísticas de Impacto", {
-            "fields": (("stat1_number", "stat1_label"), ("stat2_number", "stat2_label"), ("stat3_number", "stat3_label")),
-            "description": "Números de destaque exibidos em cartões vidro por baixo do botão principal."
+        ("Estatísticas de Destaque", {
+            "fields": (
+                ("stat1_number", "stat1_label"),
+                ("stat2_number", "stat2_label"),
+                ("stat3_number", "stat3_label")
+            ),
+            "description": "Indicadores chave apresentados abaixo dos botões iniciais."
         }),
-        ("💬 5. Canais de Contacto & Redes Sociais", {
+        ("Canais de Contacto & Redes Sociais", {
             "fields": ("contact_email", "whatsapp_number", "link_behance", "link_dribbble", "link_instagram", "link_linkedin", "link_github"),
-            "description": "As redes e contactos que aparecerão nos botões, rodapé e convites do site."
+            "description": "Links sociais exibidos no rodapé e número para botão de chat WhatsApp direto."
         }),
-        ("✉️ 6. Personalização do Convite Final (CTA & Contacto)", {
+        ("Bloco Final de Conversão (CTA)", {
             "fields": ("cta_title", "cta_subtitle"),
-            "description": "A mensagem de chamada de atenção antes de encerrar o portfólio."
+            "description": "Mensagem convidativa na área final do portfólio antes do contacto."
         }),
     )
 
@@ -39,74 +44,143 @@ class GeneralSettingAdmin(admin.ModelAdmin):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('media_preview', 'title', 'category', 'section', 'client_name', 'project_year', 'order', 'is_video')
-    list_editable = ('section', 'category', 'order', 'is_video')
-    list_filter = ('section', 'is_video', 'project_year')
-    search_fields = ('title', 'category', 'description', 'client_name')
+    list_display = ('media_preview_box', 'title_display', 'section_badge', 'category', 'client_name', 'order', 'is_video')
+    list_editable = ('order', 'is_video')
+    list_filter = ('section', 'is_video', 'project_year', 'category')
+    search_fields = ('title', 'category', 'description', 'client_name', 'featured_tag')
     ordering = ('section', 'order')
     list_per_page = 20
+
+    actions = [
+        'move_to_featured_main',
+        'move_to_featured_side',
+        'move_to_gallery_small',
+        'move_to_gallery_asym',
+        'move_to_reel',
+        'toggle_video_status'
+    ]
     
     fieldsets = (
-        ("📁 1. Asset & Media (Imagem ou Vídeo)", {
+        ("Ficheiro & Alocação Visual", {
             "fields": ("media_file", "is_video", "section", "order"),
-            "description": "Escolha o ficheiro no Cloudinary e onde ele irá aparecer no site (Destaque, Galeria 3 colunas, Assimétrico ou Reel)."
+            "description": "Selecione a obra no Cloudinary e escolha em que galeria do site deseja expor o trabalho."
         }),
-        ("✍️ 2. Editorial & Narrativa (Sempre Visível nas Cards)", {
+        ("Conteúdo Editorial & Narrativa", {
             "fields": ("title", "category", "description"),
-            "description": "Textos organizados por baixo ou ao lado de cada projeto para dar contexto profissional e autoridade ao trabalho."
+            "description": "Textos descritivos que acompanham o cartão editorial no site."
         }),
-        ("🏷️ 3. Metadados do Cliente & Links", {
+        ("Metadados & Ligações Externas", {
             "fields": ("client_name", "project_year", "featured_tag", "project_url"),
             "classes": ("collapse",),
-            "description": "Informações opcionais (nome da marca atendida, ano de entrega e link para o estudo de caso no Behance)."
+            "description": "Informações de apoio (ano da obra, nome da marca e link para visualização no Behance/Live site)."
         }),
     )
 
-    def media_preview(self, obj):
+    def title_display(self, obj):
+        title = obj.title or "Obra sem título"
+        tag = f' <span style="color:#60a5fa; font-size:0.75rem; margin-left:6px;">[{obj.featured_tag}]</span>' if obj.featured_tag else ""
+        return format_html(f'<strong>{title}</strong>{tag}')
+    title_display.short_description = "Título da Obra"
+
+    def section_badge(self, obj):
+        colors = {
+            'featured_main': '#3b82f6',
+            'featured_side': '#6366f1',
+            'gallery_small': '#10b981',
+            'gallery_asym': '#8b5cf6',
+            'reel': '#f43f5e'
+        }
+        color = colors.get(obj.section, '#64748b')
+        label = obj.get_section_display().split(' (')[0]
+        return format_html(
+            '<span style="border-left: 3px solid {}; padding-left: 8px; font-weight: 500;">{}</span>',
+            color, label
+        )
+    section_badge.short_description = "Secção no Site"
+
+    def media_preview_box(self, obj):
         if not obj.media_file:
-            return format_html('<span style="color: #888; font-style: italic;">Sem Media</span>')
+            return format_html('<span style="color: #64748b; font-style: italic;">Sem Media</span>')
         try:
             url = obj.media_file.url
             if obj.is_video:
                 return format_html(
-                    '<div class="thumb-preview"><video src="{}" style="width:75px; height:52px; object-fit:cover; border-radius:6px; background:#000;" autoplay muted loop playsinline></video></div>',
+                    '<div class="studio-thumb">'
+                    '<video src="{}#t=0.1" preload="metadata" style="width:100%; height:100%; object-fit:cover;"></video>'
+                    '<span class="studio-thumb-badge" style="color:#f43f5e;">VIDEO</span>'
+                    '</div>',
                     url
                 )
             return format_html(
-                '<div class="thumb-preview"><img src="{}" style="width:75px; height:52px; object-fit:cover; border-radius:6px; box-shadow: 0 2px 8px rgba(0,0,0,0.5);" /></div>',
+                '<div class="studio-thumb">'
+                '<img src="{}" alt="Preview" loading="lazy" />'
+                '<span class="studio-thumb-badge">IMG</span>'
+                '</div>',
                 url
             )
         except Exception:
-            return format_html('<span style="color: #e53e3e;">Erro URL</span>')
+            return format_html('<span style="color: #e53e3e;">Erro de Link</span>')
+    media_preview_box.short_description = "Miniatura"
 
-    media_preview.short_description = "Miniatura"
+    # ── Bulk Executive Actions ──
+    @admin.action(description="★ Mover selecionados para Showcase Principal")
+    def move_to_featured_main(self, request, queryset):
+        updated = queryset.update(section='featured_main')
+        self.message_user(request, f"{updated} obra(s) movida(s) para o Showcase Principal do site.", messages.SUCCESS)
+
+    @admin.action(description="■ Mover selecionados para Destaques Secundários")
+    def move_to_featured_side(self, request, queryset):
+        updated = queryset.update(section='featured_side')
+        self.message_user(request, f"{updated} obra(s) movida(s) para os Destaques Secundários.", messages.SUCCESS)
+
+    @admin.action(description="❖ Mover selecionados para Galeria (3 Colunas)")
+    def move_to_gallery_small(self, request, queryset):
+        updated = queryset.update(section='gallery_small')
+        self.message_user(request, f"{updated} obra(s) transferida(s) para a Galeria de Criações.", messages.SUCCESS)
+
+    @admin.action(description="◆ Mover selecionados para Galeria Assimétrica")
+    def move_to_gallery_asym(self, request, queryset):
+        updated = queryset.update(section='gallery_asym')
+        self.message_user(request, f"{updated} obra(s) atribuida(s) à Galeria Assimétrica.", messages.SUCCESS)
+
+    @admin.action(description="🎬 Mover selecionados para Vídeo Reel")
+    def move_to_reel(self, request, queryset):
+        updated = queryset.update(section='reel', is_video=True)
+        self.message_user(request, f"{updated} obra(s) movida(s) e ativadas na secção de Vídeo Reel.", messages.SUCCESS)
+
+    @admin.action(description="🔄 Alternar Status de Vídeo / Imagem")
+    def toggle_video_status(self, request, queryset):
+        for obj in queryset:
+            obj.is_video = not obj.is_video
+            obj.save()
+        self.message_user(request, f"Status de vídeo invertido para {queryset.count()} obra(s).", messages.INFO)
 
 
 @admin.register(Tool)
 class ToolAdmin(admin.ModelAdmin):
-    list_display = ('name', 'percentage_progress', 'percentage', 'order')
+    list_display = ('name', 'progress_bar_view', 'percentage', 'order')
     list_editable = ('percentage', 'order')
     ordering = ('order',)
     
-    def percentage_progress(self, obj):
+    def progress_bar_view(self, obj):
         return format_html(
-            '<div style="background: rgba(255,255,255,0.08); border-radius: 20px; width: 120px; height: 10px; overflow: hidden; display: inline-block; vertical-align: middle;">'
-            '<div style="background: #4C75EE; width: {}%; height: 100%; border-radius: 20px;"></div>'
+            '<div style="background: rgba(255,255,255,0.06); border-radius: 6px; width: 140px; height: 8px; overflow: hidden; display: inline-block; vertical-align: middle;">'
+            '<div style="background: #3b66f5; width: {}%; height: 100%; border-radius: 6px;"></div>'
             '</div>',
             obj.percentage
         )
-    percentage_progress.short_description = "Nível Gráfico"
+    progress_bar_view.short_description = "Nível Gráfico"
 
 
 @admin.register(CreativeStep)
 class CreativeStepAdmin(admin.ModelAdmin):
-    list_display = ('step_badge', 'title', 'order')
+    list_display = ('step_badge_view', 'title', 'order')
     list_editable = ('title', 'order')
     ordering = ('order',)
     
-    def step_badge(self, obj):
+    def step_badge_view(self, obj):
         return format_html(
-            '<span style="background: #4C75EE; color: #fff; padding: 4px 10px; border-radius: 8px; font-weight: 800; font-family: sans-serif;">{}</span>',
+            '<span style="background: rgba(59, 102, 245, 0.2); color: #60a5fa; border: 1px solid rgba(59, 102, 245, 0.4); padding: 3px 10px; border-radius: 6px; font-weight: 700; font-size: 0.82rem;">Nº {}</span>',
             obj.step_number
         )
-    step_badge.short_description = "Passo Nº"
+    step_badge_view.short_description = "Etapa"
