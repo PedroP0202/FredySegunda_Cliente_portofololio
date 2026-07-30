@@ -725,35 +725,39 @@
 
   </section>
 
-  <!-- ══════════════════════════════════════════════════
+  <!-- ══════════════════════════════════════════════════════
        CTA / CONTACTO (PREMIUM SECTION)
-       ══════════════════════════════════════════════════ -->
+       ══════════════════════════════════════════════════════ -->
   <section class="cta-block" id="contacto">
 
-    <div class="gsap-reveal">
-      <span class="sec-tag" style="color:#a5beff; margin-bottom:12px; display:inline-block;">Próximo Passo</span>
-      <h2 class="cta-title">{{ setting.cta_title|default:"Pronto para dar vida<br>ao seu próximo projeto?"|safe }}</h2>
-      <p class="cta-sub">{{ setting.cta_subtitle|default:"Estou atualmente disponível para projetos freelance, novas marcas e parcerias criativas que valorizem design memorável e detalhista." }}</p>
+    <!-- foto de fundo à direita -->
+    <div class="cta-photo-bg" aria-hidden="true">
+      <img src="/media/projects_media/fredy_contact.jpg" alt="Fredy Segunda">
     </div>
-    <div class="cta-action gsap-reveal">
-      {% if setting.whatsapp_number %}
-      <a href="https://wa.me/{{ setting.whatsapp_number }}" target="_blank" rel="noopener noreferrer" class="btn-dark"
-        style="margin-bottom:6px; background:#14532d; border-color:#22c55e;">
-        <i class="ti ti-brand-whatsapp" style="font-size:1.35rem; color:#4ade80;"></i>
-        Conversar no WhatsApp
-      </a>
-      {% endif %}
-      <a href="mailto:{{ setting.contact_email|default:'fredy.segunda@email.com' }}" class="btn-dark">
-        <i class="ti ti-mail" style="font-size:1.3rem;"></i>
-        Iniciar Conversa &amp; Orçamento
-      </a>
-      <p class="cta-email">{{ setting.contact_email|default:'fredy.segunda@email.com' }}</p>
-    </div>
-    
 
-    <div class="cta-image-wrap">
-      <img src="/media/projects_media/0d2d85e6-9da8-4b6e-b5c1-aea169e4cf4a.JPG" alt="" class="cta-image">
+    <!-- conteúdo sobre o gradiente azul à esquerda -->
+    <div class="cta-content">
+      <div class="gsap-reveal">
+        <span class="sec-tag" style="color:#a5beff; margin-bottom:12px; display:inline-block;">Próximo Passo</span>
+        <h2 class="cta-title">{{ setting.cta_title|default:"Pronto para dar vida<br>ao seu próximo projeto?"|safe }}</h2>
+        <p class="cta-sub">{{ setting.cta_subtitle|default:"Estou atualmente disponível para projetos freelance, novas marcas e parcerias criativas que valorizem design memorável e detalhista." }}</p>
+      </div>
+      <div class="cta-action gsap-reveal">
+        {% if setting.whatsapp_number %}
+        <a href="https://wa.me/{{ setting.whatsapp_number }}" target="_blank" rel="noopener noreferrer" class="btn-dark"
+          style="background:#14532d; border-color:#22c55e;">
+          <i class="ti ti-brand-whatsapp" style="font-size:1.35rem; color:#4ade80;"></i>
+          Conversar no WhatsApp
+        </a>
+        {% endif %}
+        <a href="mailto:{{ setting.contact_email|default:'fredy.segunda@email.com' }}" class="btn-dark">
+          <i class="ti ti-mail" style="font-size:1.3rem;"></i>
+          Iniciar Conversa &amp; Orçamento
+        </a>
+        <p class="cta-email">{{ setting.contact_email|default:'fredy.segunda@email.com' }}</p>
+      </div>
     </div>
+
   </section>
 
   <!-- ── FOOTER ── -->
