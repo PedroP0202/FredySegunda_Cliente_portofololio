@@ -185,8 +185,7 @@
           <span class="hero-title-inner">Marcas que</span>
         </span> -->
         <span class="hero-title-line">
-          <span class="hero-title-inner blue" style="color:var(--blue);">{% if setting.hero_title %}{{
-            setting.hero_title|safe }}{% else %}ficam{% endif %}</span>
+          <span class="hero-title-inner blue" style="color:var(--blue);">{% if setting.hero_title %}{{ setting.hero_title|safe }}{% else %}ficam{% endif %}</span>
         </span>
         <!-- <span class="hero-title-line">
           <span class="hero-title-inner">na memória.</span>
@@ -196,8 +195,7 @@
       <!-- Meta info row -->
       <div class="hero-meta" id="hero-meta">
         <div class="hero-meta-item">
-          <span class="pill" style="background:rgba(76,117,238,0.2); color:var(--blue-light);">{{
-            setting.hero_year|default:"2026" }}</span>
+          <span class="pill" style="background:rgba(76,117,238,0.2); color:var(--blue-light);">{{ setting.hero_year|default:"2026" }}</span>
           Direção Criativa &amp; Branding
         </div>
         <div class="hero-meta-sep" aria-hidden="true"></div>
@@ -208,8 +206,7 @@
 
       <!-- Description -->
       <p class="hero-desc" id="hero-desc">
-        {{ setting.hero_desc|default:"Especializado em identidade visual e ilustração digital. Crio sistemas de marca
-        com carácter — do conceito estético ao detalhe de acabamento final." }}
+        {{ setting.hero_desc|default:"Especializado em identidade visual e ilustração digital. Crio sistemas de marca com carácter — do conceito estético ao detalhe de acabamento final." }}
       </p>
 
       <!-- CTA Buttons -->
@@ -359,16 +356,13 @@
             <i class="ti ti-arrow-up-right title-arrow"></i>
           </h3>
           <p class="showcase-desc">
-            {{ featured_main.description|default:"Desenvolvimento integral da identidade visual, manual de normas,
-            tipografia e direção de arte, concebido para transmitir solidez e originalidade estética num ambiente
-            competitivo moderno." }}
+            {{ featured_main.description|default:"Desenvolvimento integral da identidade visual, manual de normas, tipografia e direção de arte, concebido para transmitir solidez e originalidade estética num ambiente competitivo moderno." }}
           </p>
         </div>
         <div class="showcase-footer">
           <span class="action-hint"><i class="ti ti-eye"></i> Clique para Ampliar &amp; Explorar</span>
           {% if featured_main and featured_main.client_name %}
-          <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Cliente: {{
-            featured_main.client_name }} ({{ featured_main.project_year|default:'2026' }})</span>
+          <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Cliente: {{ featured_main.client_name }} ({{ featured_main.project_year|default:'2026' }})</span>
           {% elif featured_main and featured_main.is_video %}
           <span
             style="font-size:0.72rem; color:var(--blue-light); text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">Motion
@@ -408,16 +402,14 @@
       <div class="card-body">
         <div class="card-meta">
           <span class="card-category">{{ proj.category|default:"Projeto Criativo" }}</span>
-          {% if proj.project_year %}<span style="font-size:0.7rem; color:var(--text-dim);">{{ proj.project_year
-            }}</span>{% endif %}
+          {% if proj.project_year %}<span style="font-size:0.7rem; color:var(--text-dim);">{{ proj.project_year }}</span>{% endif %}
         </div>
         <h4 class="card-title">
           {{ proj.title|default:"Obra Selecionada" }}
           <i class="ti ti-arrow-up-right card-title-arrow"></i>
         </h4>
         <p class="card-desc">
-          {{ proj.description|default:"Conceitualização e execução visual com foco em equilíbrio gráfico, impacto
-          tipográfico e comunicação direcionada ao público-alvo." }}
+          {{ proj.description|default:"Conceitualização e execução visual com foco em equilíbrio gráfico, impacto tipográfico e comunicação direcionada ao público-alvo." }}
         </p>
       </div>
 
@@ -467,16 +459,14 @@
       <div class="card-body">
         <div class="card-meta">
           <span class="card-category">{{ proj.category|default:"Ilustração Digital" }}</span>
-          {% if proj.client_name %}<span style="font-size:0.68rem; color:var(--text-dim);">{{ proj.client_name
-            }}</span>{% endif %}
+          {% if proj.client_name %}<span style="font-size:0.68rem; color:var(--text-dim);">{{ proj.client_name }}</span>{% endif %}
         </div>
         <h4 class="card-title">
           {{ proj.title|default:"Composição Gráfica" }}
           <i class="ti ti-arrow-up-right card-title-arrow"></i>
         </h4>
         <p class="card-desc">
-          {{ proj.description|default:"Exploração cromática e vetorial pensada para ilustrar conceitos originais com
-          acabamento minucioso." }}
+          {{ proj.description|default:"Exploração cromática e vetorial pensada para ilustrar conceitos originais com acabamento minucioso." }}
         </p>
       </div>
 
@@ -504,17 +494,14 @@
       <div class="card-body">
         <div class="card-meta">
           <span class="card-category">{{ proj.category|default:"Direção de Arte &amp; Editorial" }}</span>
-          {% if proj.featured_tag %}<span
-            style="font-size:0.65rem; background:rgba(76,117,238,0.15); color:var(--blue-light); padding:2px 8px; border-radius:12px;">{{
-            proj.featured_tag }}</span>{% endif %}
+          {% if proj.featured_tag %}<span style="font-size:0.65rem; background:rgba(76,117,238,0.15); color:var(--blue-light); padding:2px 8px; border-radius:12px;">{{ proj.featured_tag }}</span>{% endif %}
         </div>
         <h4 class="card-title" style="font-size:1.35rem;">
           {{ proj.title|default:"Peça Conceitual de Assinatura" }}
           <i class="ti ti-arrow-up-right card-title-arrow"></i>
         </h4>
         <p class="card-desc" style="-webkit-line-clamp: 4; font-size:0.92rem;">
-          {{ proj.description|default:"Projeto concebido com atenção minuciosa ao detalhe, integrando tipografia
-          expressiva e simbolismo marcante para comunicação de marca eficaz e diferenciada." }}
+          {{ proj.description|default:"Projeto concebido com atenção minuciosa ao detalhe, integrando tipografia expressiva e simbolismo marcante para comunicação de marca eficaz e diferenciada." }}
         </p>
       </div>
 
@@ -532,8 +519,7 @@
       <h2 class="sec-title">{{ custom_gal.name }}</h2>
     </div>
     {% if custom_gal.description %}
-    <p class="sec-sub" style="max-width: 500px; font-size: 0.95rem; line-height: 1.5; color: var(--text-muted);">{{
-      custom_gal.description }}</p>
+    <p class="sec-sub" style="max-width: 500px; font-size: 0.95rem; line-height: 1.5; color: var(--text-muted);">{{ custom_gal.description }}</p>
     {% endif %}
   </div>
 
@@ -558,8 +544,7 @@
       <div class="card-body">
         <div class="card-meta">
           <span class="card-category">{{ proj.category|default:"Galeria Especial" }}</span>
-          {% if proj.client_name %}<span style="font-size:0.68rem; color:var(--text-dim);">{{ proj.client_name
-            }}</span>{% endif %}
+          {% if proj.client_name %}<span style="font-size:0.68rem; color:var(--text-dim);">{{ proj.client_name }}</span>{% endif %}
         </div>
         <h4 class="card-title">
           {{ proj.title|default:"Obra Selecionada" }}
@@ -748,8 +733,7 @@
     <div class="gsap-reveal">
       <span class="sec-tag" style="color:#a5beff; margin-bottom:12px; display:inline-block;">Próximo Passo</span>
       <h2 class="cta-title">{{ setting.cta_title|default:"Pronto para dar vida<br>ao seu próximo projeto?"|safe }}</h2>
-      <p class="cta-sub">{{ setting.cta_subtitle|default:"Estou atualmente disponível para projetos freelance, novas
-        marcas e parcerias criativas que valorizem design memorável e detalhista." }}</p>
+      <p class="cta-sub">{{ setting.cta_subtitle|default:"Estou atualmente disponível para projetos freelance, novas marcas e parcerias criativas que valorizem design memorável e detalhista." }}</p>
     </div>
     <div class="cta-action gsap-reveal">
       {% if setting.whatsapp_number %}
