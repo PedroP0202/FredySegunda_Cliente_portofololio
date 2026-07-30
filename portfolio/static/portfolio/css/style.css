@@ -899,7 +899,7 @@ nav.scrolled {
   z-index: 1;              /* garante que ficam por cima da imagem */
 }
 
-.cta-image-wrap {
+/* .cta-image-wrap {
   position: relative;
   z-index: 1;
   max-width: 45%;
@@ -915,14 +915,14 @@ nav.scrolled {
 }
 
 /* Gradiente sobreposto à esquerda da imagem, fundindo com o azul */
-.cta-image-wrap::before {
+/* .cta-image-wrap::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, #152669 0%, rgba(21,38,105,0) 40%);
   z-index: 2;
   pointer-events: none;
-}
+} */
 
 /* .cta-title { font-family: var(--font-head); font-weight: 800; font-size: clamp(2.4rem, 4.5vw, 3.8rem); letter-spacing: -0.03em; line-height: 1.05; color: #fff; }
 .cta-sub   { font-size: 1.05rem; color: rgba(255,255,255,0.75); margin-top: 12px; max-width: 480px; }
