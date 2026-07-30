@@ -882,7 +882,7 @@ nav.scrolled {
 
 .cta-image {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 60%; left: 50%;
   transform: translate(-50%, -50%);
   z-index: 0;              /* acima dos gradientes (-1), abaixo do texto */
   max-width: 60%;
