@@ -3,19 +3,25 @@
 
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{{ setting.meta_description|default:'Fredy Segunda — Designer Gráfico especializado em identidade visual e ilustração digital. Disponível para projetos freelance.' }}">
-  <meta property="og:title" content="{{ setting.site_title|default:'Fredy Segunda — Direção Criativa & Design Gráfico' }}">
-  <meta property="og:description" content="{{ setting.meta_description|default:'Especializado em identidade visual e ilustração digital. Crio sistemas de marca com carácter — do conceito ao detalhe final.' }}">
+  <meta name="description"
+    content="{{ setting.meta_description|default:'Fredy Segunda — Designer Gráfico especializado em identidade visual e ilustração digital. Disponível para projetos freelance.' }}">
+  <meta property="og:title"
+    content="{{ setting.site_title|default:'Fredy Segunda — Direção Criativa & Design Gráfico' }}">
+  <meta property="og:description"
+    content="{{ setting.meta_description|default:'Especializado em identidade visual e ilustração digital. Crio sistemas de marca com carácter — do conceito ao detalhe final.' }}">
   <meta property="og:type" content="website">
   <title>{{ setting.site_title|default:"Fredy Segunda — Direção Criativa &amp; Design Gráfico" }}</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -30,13 +36,33 @@
   <!-- ── STUDIO THEME CUSTOMIZATION FROM ADMIN ── -->
   <style>
     :root {
-      --bg: {{ setting.get_effective_bg|default:"#08080c" }};
-      {% if setting.accent_color %}
-      --blue: {{ setting.accent_color }};
-      {% endif %}
+      --bg: {
+          {
+          setting.get_effective_bg|default: "#08080c"
+        }
+      }
+
+      ;
+
+        {
+        % if setting.accent_color %
+      }
+
+      --blue: {
+          {
+          setting.accent_color
+        }
+      }
+
+      ;
+
+        {
+        % endif %
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- ── SCROLL PROGRESS BAR ── -->
@@ -52,34 +78,39 @@
   <!-- ── FLOATING GLASS SOCIAL DOCK (STRATEGIC SIDEBAR / BOTTOM) ── -->
   <aside class="floating-social-dock" aria-label="Canais de Comunicação Rápida">
     {% if setting.link_behance and setting.link_behance != "#" %}
-      <a href="{{ setting.link_behance }}" target="_blank" rel="noopener noreferrer" class="dock-icon" aria-label="Behance">
-        <i class="ti ti-brand-behance"></i>
-        <span class="dock-tooltip">Behance</span>
-      </a>
+    <a href="{{ setting.link_behance }}" target="_blank" rel="noopener noreferrer" class="dock-icon"
+      aria-label="Behance">
+      <i class="ti ti-brand-behance"></i>
+      <span class="dock-tooltip">Behance</span>
+    </a>
     {% endif %}
     {% if setting.link_dribbble and setting.link_dribbble != "#" %}
-      <a href="{{ setting.link_dribbble }}" target="_blank" rel="noopener noreferrer" class="dock-icon" aria-label="Dribbble">
-        <i class="ti ti-brand-dribbble"></i>
-        <span class="dock-tooltip">Dribbble</span>
-      </a>
+    <a href="{{ setting.link_dribbble }}" target="_blank" rel="noopener noreferrer" class="dock-icon"
+      aria-label="Dribbble">
+      <i class="ti ti-brand-dribbble"></i>
+      <span class="dock-tooltip">Dribbble</span>
+    </a>
     {% endif %}
     {% if setting.link_instagram and setting.link_instagram != "#" %}
-      <a href="{{ setting.link_instagram }}" target="_blank" rel="noopener noreferrer" class="dock-icon" aria-label="Instagram">
-        <i class="ti ti-brand-instagram"></i>
-        <span class="dock-tooltip">Instagram</span>
-      </a>
+    <a href="{{ setting.link_instagram }}" target="_blank" rel="noopener noreferrer" class="dock-icon"
+      aria-label="Instagram">
+      <i class="ti ti-brand-instagram"></i>
+      <span class="dock-tooltip">Instagram</span>
+    </a>
     {% endif %}
     {% if setting.link_linkedin and setting.link_linkedin != "#" %}
-      <a href="{{ setting.link_linkedin }}" target="_blank" rel="noopener noreferrer" class="dock-icon" aria-label="LinkedIn">
-        <i class="ti ti-brand-linkedin"></i>
-        <span class="dock-tooltip">LinkedIn</span>
-      </a>
+    <a href="{{ setting.link_linkedin }}" target="_blank" rel="noopener noreferrer" class="dock-icon"
+      aria-label="LinkedIn">
+      <i class="ti ti-brand-linkedin"></i>
+      <span class="dock-tooltip">LinkedIn</span>
+    </a>
     {% endif %}
     {% if setting.whatsapp_number %}
-      <a href="https://wa.me/{{ setting.whatsapp_number }}" target="_blank" rel="noopener noreferrer" class="dock-icon dock-icon-wa" aria-label="WhatsApp Chat">
-        <i class="ti ti-brand-whatsapp"></i>
-        <span class="dock-tooltip">WhatsApp</span>
-      </a>
+    <a href="https://wa.me/{{ setting.whatsapp_number }}" target="_blank" rel="noopener noreferrer"
+      class="dock-icon dock-icon-wa" aria-label="WhatsApp Chat">
+      <i class="ti ti-brand-whatsapp"></i>
+      <span class="dock-tooltip">WhatsApp</span>
+    </a>
     {% endif %}
     <a href="#contacto" class="dock-icon" aria-label="Enviar Email">
       <i class="ti ti-mail"></i>
@@ -92,7 +123,7 @@
     <a class="nav-link" href="#trabalho">Showcase</a>
     <a class="nav-link" href="#galeria">Criações</a>
     {% for custom_gal in custom_galleries %}
-      <a class="nav-link" href="#gal-{{ custom_gal.id }}">{{ custom_gal.name|truncatewords:2 }}</a>
+    <a class="nav-link" href="#gal-{{ custom_gal.id }}">{{ custom_gal.name|truncatewords:2 }}</a>
     {% endfor %}
     <a class="nav-link" href="#reel">Reel</a>
     <a class="nav-link" href="#skills">Stack</a>
@@ -106,7 +137,7 @@
       <a class="nav-link" href="#trabalho">Showcase</a>
       <a class="nav-link" href="#galeria">Criações</a>
       {% for custom_gal in custom_galleries %}
-        <a class="nav-link" href="#gal-{{ custom_gal.id }}">{{ custom_gal.name|truncatewords:2 }}</a>
+      <a class="nav-link" href="#gal-{{ custom_gal.id }}">{{ custom_gal.name|truncatewords:2 }}</a>
       {% endfor %}
       <a class="nav-link" href="#reel">Reel</a>
       <a class="nav-link" href="#skills">Stack</a>
@@ -115,24 +146,26 @@
       <!-- Quick Social Icons on Header -->
       <div class="nav-socials" aria-label="Redes no Topo">
         {% if setting.link_behance and setting.link_behance != "#" %}
-          <a href="{{ setting.link_behance }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn" title="Behance">
-            <i class="ti ti-brand-behance"></i>
-          </a>
+        <a href="{{ setting.link_behance }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn"
+          title="Behance">
+          <i class="ti ti-brand-behance"></i>
+        </a>
         {% endif %}
         {% if setting.link_dribbble and setting.link_dribbble != "#" %}
-          <a href="{{ setting.link_dribbble }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn" title="Dribbble">
-            <i class="ti ti-brand-dribbble"></i>
-          </a>
+        <a href="{{ setting.link_dribbble }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn"
+          title="Dribbble">
+          <i class="ti ti-brand-dribbble"></i>
+        </a>
         {% endif %}
       </div>
 
       <a href="#contacto" class="nav-dot-wrap" title="Status de Agenda &amp; Colaborações">
         {% if setting.is_available or setting.is_available is None %}
-          <div class="nav-dot"></div>
-          <span>Disponível</span>
+        <div class="nav-dot"></div>
+        <span>Disponível</span>
         {% else %}
-          <div class="nav-dot" style="background:#ef4444; box-shadow: 0 0 10px #ef4444;"></div>
-          <span>Em Projeto</span>
+        <div class="nav-dot" style="background:#ef4444; box-shadow: 0 0 10px #ef4444;"></div>
+        <span>Em Projeto</span>
         {% endif %}
       </a>
     </div>
@@ -158,9 +191,9 @@
       <!-- Badge com Status de Disponibilidade Dinâmico -->
       <div class="hero-badge" id="hero-badge">
         {% if setting.is_available or setting.is_available is None %}
-          <span class="badge-dot"></span>
+        <span class="badge-dot"></span>
         {% else %}
-          <span class="badge-dot" style="background:#ef4444; box-shadow: 0 0 8px #ef4444;"></span>
+        <span class="badge-dot" style="background:#ef4444; box-shadow: 0 0 8px #ef4444;"></span>
         {% endif %}
         {{ setting.availability_badge_text|default:"Disponível para Projetos Freelance &amp; Colaborações" }}
       </div>
@@ -171,7 +204,8 @@
           <span class="hero-title-inner">Marcas que</span>
         </span> -->
         <span class="hero-title-line">
-          <span class="hero-title-inner blue" style="color:var(--blue);">{% if setting.hero_title %}{{ setting.hero_title|safe }}{% else %}ficam{% endif %}</span>
+          <span class="hero-title-inner blue" style="color:var(--blue);">{% if setting.hero_title %}{{
+            setting.hero_title|safe }}{% else %}ficam{% endif %}</span>
         </span>
         <!-- <span class="hero-title-line">
           <span class="hero-title-inner">na memória.</span>
@@ -181,7 +215,8 @@
       <!-- Meta info row -->
       <div class="hero-meta" id="hero-meta">
         <div class="hero-meta-item">
-          <span class="pill" style="background:rgba(76,117,238,0.2); color:var(--blue-light);">{{ setting.hero_year|default:"2026" }}</span>
+          <span class="pill" style="background:rgba(76,117,238,0.2); color:var(--blue-light);">{{
+            setting.hero_year|default:"2026" }}</span>
           Direção Criativa &amp; Branding
         </div>
         <div class="hero-meta-sep" aria-hidden="true"></div>
@@ -192,7 +227,8 @@
 
       <!-- Description -->
       <p class="hero-desc" id="hero-desc">
-        {{ setting.hero_desc|default:"Especializado em identidade visual e ilustração digital. Crio sistemas de marca com carácter — do conceito estético ao detalhe de acabamento final." }}
+        {{ setting.hero_desc|default:"Especializado em identidade visual e ilustração digital. Crio sistemas de marca
+        com carácter — do conceito estético ao detalhe de acabamento final." }}
       </p>
 
       <!-- CTA Buttons -->
@@ -201,37 +237,37 @@
           Explorar Portfólio <i class="ti ti-arrow-down-right"></i>
         </a>
         {% if setting.cv_file %}
-          <a href="{{ setting.cv_file.url }}" class="btn-sec" download>
-            <i class="ti ti-file-download"></i> Transferir Currículo
-          </a>
+        <a href="{{ setting.cv_file.url }}" class="btn-sec" download>
+          <i class="ti ti-file-download"></i> Transferir Currículo
+        </a>
         {% else %}
-          <a href="#contacto" class="btn-sec">
-            <i class="ti ti-mail"></i> Entrar em Contacto
-          </a>
+        <a href="#contacto" class="btn-sec">
+          <i class="ti ti-mail"></i> Entrar em Contacto
+        </a>
         {% endif %}
       </div>
 
       <!-- STRATEGIC HERO SOCIAL STRIP (NEW) -->
       <div class="hero-social-row gsap-reveal" aria-label="Redes de Design em Destaque">
         {% if setting.link_behance and setting.link_behance != "#" %}
-          <a href="{{ setting.link_behance }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
-            <i class="ti ti-brand-behance"></i> Behance <span style="opacity:0.5;">↗</span>
-          </a>
+        <a href="{{ setting.link_behance }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
+          <i class="ti ti-brand-behance"></i> Behance <span style="opacity:0.5;">↗</span>
+        </a>
         {% endif %}
         {% if setting.link_dribbble and setting.link_dribbble != "#" %}
-          <a href="{{ setting.link_dribbble }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
-            <i class="ti ti-brand-dribbble"></i> Dribbble <span style="opacity:0.5;">↗</span>
-          </a>
+        <a href="{{ setting.link_dribbble }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
+          <i class="ti ti-brand-dribbble"></i> Dribbble <span style="opacity:0.5;">↗</span>
+        </a>
         {% endif %}
         {% if setting.link_instagram and setting.link_instagram != "#" %}
-          <a href="{{ setting.link_instagram }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
-            <i class="ti ti-brand-instagram"></i> Instagram <span style="opacity:0.5;">↗</span>
-          </a>
+        <a href="{{ setting.link_instagram }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
+          <i class="ti ti-brand-instagram"></i> Instagram <span style="opacity:0.5;">↗</span>
+        </a>
         {% endif %}
         {% if setting.link_linkedin and setting.link_linkedin != "#" %}
-          <a href="{{ setting.link_linkedin }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
-            <i class="ti ti-brand-linkedin"></i> LinkedIn <span style="opacity:0.5;">↗</span>
-          </a>
+        <a href="{{ setting.link_linkedin }}" target="_blank" rel="noopener noreferrer" class="hero-soc-pill">
+          <i class="ti ti-brand-linkedin"></i> LinkedIn <span style="opacity:0.5;">↗</span>
+        </a>
         {% endif %}
       </div>
 
@@ -302,25 +338,25 @@
   </div>
 
   <div class="showcase-container">
-    <div class="showcase-main-card gsap-reveal"
-      {% if featured_main %}
-        data-media-url="{{ featured_main.media_file.url }}"
-        data-media-type="{% if featured_main.is_video %}video{% else %}image{% endif %}"
-        onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)"
-      {% endif %}>
+    <div class="showcase-main-card gsap-reveal" {% if featured_main %}
+      data-media-url="{{ featured_main.media_file.url }}"
+      data-media-type="{% if featured_main.is_video %}video{% else %}image{% endif %}"
+      onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)" {% endif %}>
 
       <div class="showcase-media">
         {% if featured_main %}
-          {% if featured_main.is_video %}
-            <video src="{{ featured_main.media_file.url }}" autoplay muted loop playsinline aria-label="{{ featured_main.title }}"></video>
-          {% else %}
-            <img src="{{ featured_main.media_file.url }}" loading="lazy" alt="{{ featured_main.title|default:'Projeto em Destaque' }}">
-          {% endif %}
+        {% if featured_main.is_video %}
+        <video src="{{ featured_main.media_file.url }}" autoplay muted loop playsinline
+          aria-label="{{ featured_main.title }}"></video>
         {% else %}
-          <div class="img-placeholder">
-            <i class="ti ti-photo" style="font-size: 2rem; opacity: 0.3;"></i>
-            <span class="upload-tag">Adicionar Projeto em Destaque no Painel Admin</span>
-          </div>
+        <img src="{{ featured_main.media_file.url }}" loading="lazy"
+          alt="{{ featured_main.title|default:'Projeto em Destaque' }}">
+        {% endif %}
+        {% else %}
+        <div class="img-placeholder">
+          <i class="ti ti-photo" style="font-size: 2rem; opacity: 0.3;"></i>
+          <span class="upload-tag">Adicionar Projeto em Destaque no Painel Admin</span>
+        </div>
         {% endif %}
         <div class="media-zoom-overlay">
           <div class="play-ring">
@@ -328,9 +364,9 @@
           </div>
         </div>
         {% if featured_main and featured_main.is_video %}
-          <div class="vid-badge" style="position:absolute; top:20px; left:20px;">
-            <div class="live-dot"></div> Vídeo Loop
-          </div>
+        <div class="vid-badge" style="position:absolute; top:20px; left:20px;">
+          <div class="live-dot"></div> Vídeo Loop
+        </div>
         {% endif %}
       </div>
 
@@ -342,15 +378,20 @@
             <i class="ti ti-arrow-up-right title-arrow"></i>
           </h3>
           <p class="showcase-desc">
-            {{ featured_main.description|default:"Desenvolvimento integral da identidade visual, manual de normas, tipografia e direção de arte, concebido para transmitir solidez e originalidade estética num ambiente competitivo moderno." }}
+            {{ featured_main.description|default:"Desenvolvimento integral da identidade visual, manual de normas,
+            tipografia e direção de arte, concebido para transmitir solidez e originalidade estética num ambiente
+            competitivo moderno." }}
           </p>
         </div>
         <div class="showcase-footer">
           <span class="action-hint"><i class="ti ti-eye"></i> Clique para Ampliar &amp; Explorar</span>
           {% if featured_main and featured_main.client_name %}
-            <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Cliente: {{ featured_main.client_name }} ({{ featured_main.project_year|default:'2026' }})</span>
+          <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Cliente: {{
+            featured_main.client_name }} ({{ featured_main.project_year|default:'2026' }})</span>
           {% elif featured_main and featured_main.is_video %}
-            <span style="font-size:0.72rem; color:var(--blue-light); text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">Motion Asset</span>
+          <span
+            style="font-size:0.72rem; color:var(--blue-light); text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">Motion
+            Asset</span>
           {% endif %}
         </div>
       </div>
@@ -360,47 +401,57 @@
 
   <div class="side-projects-grid">
     {% for proj in featured_sides %}
-      <div class="proj-card gsap-reveal"
-        data-media-url="{{ proj.media_file.url }}"
-        data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
-        onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
-        
-        <div class="card-media">
-          {% if proj.is_video %}
-            <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
-          {% else %}
-            <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title|default:'Projeto Secundário' }}">
-          {% endif %}
-          <div class="media-zoom-overlay">
-            <div class="play-ring">
-              <i class="{% if proj.is_video %}ti ti-player-play{% else %}ti ti-zoom-in{% endif %}" style="font-size:18px; color:#fff; {% if proj.is_video %}margin-left:2px;{% endif %}"></i>
-            </div>
-          </div>
-          {% if proj.is_video %}
-            <div class="vid-badge" style="position:absolute; top:15px; left:15px;">
-              <div class="live-dot"></div> Vídeo
-            </div>
-          {% endif %}
-        </div>
+    <div class="proj-card gsap-reveal" data-media-url="{{ proj.media_file.url }}"
+      data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
+      onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
 
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-category">{{ proj.category|default:"Projeto Criativo" }}</span>
-            {% if proj.project_year %}<span style="font-size:0.7rem; color:var(--text-dim);">{{ proj.project_year }}</span>{% endif %}
+      <div class="card-media">
+        {% if proj.is_video %}
+        <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
+        {% else %}
+        <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title|default:'Projeto Secundário' }}">
+        {% endif %}
+        <div class="media-zoom-overlay">
+          <div class="play-ring">
+            <i class="{% if proj.is_video %}ti ti-player-play{% else %}ti ti-zoom-in{% endif %}"
+              style="font-size:18px; color:#fff; {% if proj.is_video %}margin-left:2px;{% endif %}"></i>
           </div>
-          <h4 class="card-title">
-            {{ proj.title|default:"Obra Selecionada" }}
-            <i class="ti ti-arrow-up-right card-title-arrow"></i>
-          </h4>
-          <p class="card-desc">
-            {{ proj.description|default:"Conceitualização e execução visual com foco em equilíbrio gráfico, impacto tipográfico e comunicação direcionada ao público-alvo." }}
-          </p>
         </div>
-
+        {% if proj.is_video %}
+        <div class="vid-badge" style="position:absolute; top:15px; left:15px;">
+          <div class="live-dot"></div> Vídeo
+        </div>
+        {% endif %}
       </div>
+
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-category">{{ proj.category|default:"Projeto Criativo" }}</span>
+          {% if proj.project_year %}<span style="font-size:0.7rem; color:var(--text-dim);">{{ proj.project_year
+            }}</span>{% endif %}
+        </div>
+        <h4 class="card-title">
+          {{ proj.title|default:"Obra Selecionada" }}
+          <i class="ti ti-arrow-up-right card-title-arrow"></i>
+        </h4>
+        <p class="card-desc">
+          {{ proj.description|default:"Conceitualização e execução visual com foco em equilíbrio gráfico, impacto
+          tipográfico e comunicação direcionada ao público-alvo." }}
+        </p>
+      </div>
+
+    </div>
     {% empty %}
-      <div class="proj-card"><div class="card-media"><div class="img-placeholder"><span class="upload-tag">Sem Projeto Adicionado</span></div></div></div>
-      <div class="proj-card"><div class="card-media"><div class="img-placeholder"><span class="upload-tag">Sem Projeto Adicionado</span></div></div></div>
+    <div class="proj-card">
+      <div class="card-media">
+        <div class="img-placeholder"><span class="upload-tag">Sem Projeto Adicionado</span></div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="card-media">
+        <div class="img-placeholder"><span class="upload-tag">Sem Projeto Adicionado</span></div>
+      </div>
+    </div>
     {% endfor %}
   </div>
 
@@ -417,73 +468,76 @@
 
   <div class="gallery-grid">
     {% for proj in gallery_smalls %}
-      <div class="proj-card gsap-reveal"
-        data-media-url="{{ proj.media_file.url }}"
-        data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
-        onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
+    <div class="proj-card gsap-reveal" data-media-url="{{ proj.media_file.url }}"
+      data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
+      onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
 
-        <div class="card-media">
-          {% if proj.is_video %}
-            <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
-          {% else %}
-            <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title|default:'Ilustração' }}">
-          {% endif %}
-          <div class="media-zoom-overlay">
-            <div class="play-ring"><i class="ti ti-zoom-in" style="font-size:18px; color:#fff;"></i></div>
-          </div>
+      <div class="card-media">
+        {% if proj.is_video %}
+        <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
+        {% else %}
+        <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title|default:'Ilustração' }}">
+        {% endif %}
+        <div class="media-zoom-overlay">
+          <div class="play-ring"><i class="ti ti-zoom-in" style="font-size:18px; color:#fff;"></i></div>
         </div>
-
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-category">{{ proj.category|default:"Ilustração Digital" }}</span>
-            {% if proj.client_name %}<span style="font-size:0.68rem; color:var(--text-dim);">{{ proj.client_name }}</span>{% endif %}
-          </div>
-          <h4 class="card-title">
-            {{ proj.title|default:"Composição Gráfica" }}
-            <i class="ti ti-arrow-up-right card-title-arrow"></i>
-          </h4>
-          <p class="card-desc">
-            {{ proj.description|default:"Exploração cromática e vetorial pensada para ilustrar conceitos originais com acabamento minucioso." }}
-          </p>
-        </div>
-
       </div>
+
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-category">{{ proj.category|default:"Ilustração Digital" }}</span>
+          {% if proj.client_name %}<span style="font-size:0.68rem; color:var(--text-dim);">{{ proj.client_name
+            }}</span>{% endif %}
+        </div>
+        <h4 class="card-title">
+          {{ proj.title|default:"Composição Gráfica" }}
+          <i class="ti ti-arrow-up-right card-title-arrow"></i>
+        </h4>
+        <p class="card-desc">
+          {{ proj.description|default:"Exploração cromática e vetorial pensada para ilustrar conceitos originais com
+          acabamento minucioso." }}
+        </p>
+      </div>
+
+    </div>
     {% endfor %}
   </div>
 
   <div class="gallery-asym-grid">
     {% for proj in gallery_asyms %}
-      <div class="proj-card gsap-reveal"
-        data-media-url="{{ proj.media_file.url }}"
-        data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
-        onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
+    <div class="proj-card gsap-reveal" data-media-url="{{ proj.media_file.url }}"
+      data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
+      onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
 
-        <div class="card-media {% if forloop.first %}card-media-asym-large{% else %}card-media-asym-small{% endif %}">
-          {% if proj.is_video %}
-            <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
-          {% else %}
-            <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title|default:'Projeto Especial' }}">
-          {% endif %}
-          <div class="media-zoom-overlay">
-            <div class="play-ring"><i class="ti ti-zoom-in" style="font-size:20px; color:#fff;"></i></div>
-          </div>
+      <div class="card-media {% if forloop.first %}card-media-asym-large{% else %}card-media-asym-small{% endif %}">
+        {% if proj.is_video %}
+        <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
+        {% else %}
+        <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title|default:'Projeto Especial' }}">
+        {% endif %}
+        <div class="media-zoom-overlay">
+          <div class="play-ring"><i class="ti ti-zoom-in" style="font-size:20px; color:#fff;"></i></div>
         </div>
-
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-category">{{ proj.category|default:"Direção de Arte &amp; Editorial" }}</span>
-            {% if proj.featured_tag %}<span style="font-size:0.65rem; background:rgba(76,117,238,0.15); color:var(--blue-light); padding:2px 8px; border-radius:12px;">{{ proj.featured_tag }}</span>{% endif %}
-          </div>
-          <h4 class="card-title" style="font-size:1.35rem;">
-            {{ proj.title|default:"Peça Conceitual de Assinatura" }}
-            <i class="ti ti-arrow-up-right card-title-arrow"></i>
-          </h4>
-          <p class="card-desc" style="-webkit-line-clamp: 4; font-size:0.92rem;">
-            {{ proj.description|default:"Projeto concebido com atenção minuciosa ao detalhe, integrando tipografia expressiva e simbolismo marcante para comunicação de marca eficaz e diferenciada." }}
-          </p>
-        </div>
-
       </div>
+
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-category">{{ proj.category|default:"Direção de Arte &amp; Editorial" }}</span>
+          {% if proj.featured_tag %}<span
+            style="font-size:0.65rem; background:rgba(76,117,238,0.15); color:var(--blue-light); padding:2px 8px; border-radius:12px;">{{
+            proj.featured_tag }}</span>{% endif %}
+        </div>
+        <h4 class="card-title" style="font-size:1.35rem;">
+          {{ proj.title|default:"Peça Conceitual de Assinatura" }}
+          <i class="ti ti-arrow-up-right card-title-arrow"></i>
+        </h4>
+        <p class="card-desc" style="-webkit-line-clamp: 4; font-size:0.92rem;">
+          {{ proj.description|default:"Projeto concebido com atenção minuciosa ao detalhe, integrando tipografia
+          expressiva e simbolismo marcante para comunicação de marca eficaz e diferenciada." }}
+        </p>
+      </div>
+
+    </div>
     {% endfor %}
   </div>
 
@@ -491,89 +545,93 @@
        GALERIAS TEMÁTICAS PERSONALIZADAS (DYNAMICE SETS)
        ══════════════════════════════════════════════════ -->
   {% for custom_gal in custom_galleries %}
-    <div class="sec-header" id="gal-{{ custom_gal.id }}" style="margin-top: 5rem;">
-      <div class="sec-title-wrap">
-        <span class="sec-tag">{{ custom_gal.tag|default:"Coleção Exclusiva" }}</span>
-        <h2 class="sec-title">{{ custom_gal.name }}</h2>
-      </div>
-      {% if custom_gal.description %}
-        <p class="sec-sub" style="max-width: 500px; font-size: 0.95rem; line-height: 1.5; color: var(--text-muted);">{{ custom_gal.description }}</p>
-      {% endif %}
+  <div class="sec-header" id="gal-{{ custom_gal.id }}" style="margin-top: 5rem;">
+    <div class="sec-title-wrap">
+      <span class="sec-tag">{{ custom_gal.tag|default:"Coleção Exclusiva" }}</span>
+      <h2 class="sec-title">{{ custom_gal.name }}</h2>
     </div>
-
-    {% if custom_gal.layout_style == 'grid3' %}
-      <div class="gallery-grid">
-        {% for proj in custom_gal.projects.all %}
-          <div class="proj-card gsap-reveal"
-            data-media-url="{{ proj.media_file.url }}"
-            data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
-            onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
-
-            <div class="card-media">
-              {% if proj.is_video %}
-                <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
-              {% else %}
-                <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title }}">
-              {% endif %}
-              <div class="media-zoom-overlay">
-                <div class="play-ring"><i class="ti ti-zoom-in" style="font-size:18px; color:#fff;"></i></div>
-              </div>
-            </div>
-
-            <div class="card-body">
-              <div class="card-meta">
-                <span class="card-category">{{ proj.category|default:"Galeria Especial" }}</span>
-                {% if proj.client_name %}<span style="font-size:0.68rem; color:var(--text-dim);">{{ proj.client_name }}</span>{% endif %}
-              </div>
-              <h4 class="card-title">
-                {{ proj.title|default:"Obra Selecionada" }}
-                <i class="ti ti-arrow-up-right card-title-arrow"></i>
-              </h4>
-              <p class="card-desc">{{ proj.description|default:"Projeto pertencente a esta coleção exclusiva do estúdio." }}</p>
-            </div>
-
-          </div>
-        {% empty %}
-          <p style="padding: 0 3.5rem; color: var(--text-dim); font-style: italic;">Ainda sem obras vinculadas a esta galeria específica no painel Admin.</p>
-        {% endfor %}
-      </div>
-
-    {% else %}
-      <div class="gallery-asym-grid">
-        {% for proj in custom_gal.projects.all %}
-          <div class="proj-card gsap-reveal"
-            data-media-url="{{ proj.media_file.url }}"
-            data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
-            onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
-
-            <div class="card-media {% if forloop.first or forloop.counter0|divisibleby:3 %}card-media-asym-large{% else %}card-media-asym-small{% endif %}">
-              {% if proj.is_video %}
-                <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
-              {% else %}
-                <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title }}">
-              {% endif %}
-              <div class="media-zoom-overlay">
-                <div class="play-ring"><i class="ti ti-zoom-in" style="font-size:20px; color:#fff;"></i></div>
-              </div>
-            </div>
-
-            <div class="card-body">
-              <div class="card-meta">
-                <span class="card-category">{{ proj.category|default:"Destaque Temático" }}</span>
-              </div>
-              <h4 class="card-title" style="font-size:1.3rem;">
-                {{ proj.title|default:"Peça Conceitual" }}
-                <i class="ti ti-arrow-up-right card-title-arrow"></i>
-              </h4>
-              <p class="card-desc">{{ proj.description }}</p>
-            </div>
-
-          </div>
-        {% empty %}
-          <p style="padding: 0 3.5rem; color: var(--text-dim); font-style: italic;">Galeria assimétrica sem obras atribuídas ainda.</p>
-        {% endfor %}
-      </div>
+    {% if custom_gal.description %}
+    <p class="sec-sub" style="max-width: 500px; font-size: 0.95rem; line-height: 1.5; color: var(--text-muted);">{{
+      custom_gal.description }}</p>
     {% endif %}
+  </div>
+
+  {% if custom_gal.layout_style == 'grid3' %}
+  <div class="gallery-grid">
+    {% for proj in custom_gal.projects.all %}
+    <div class="proj-card gsap-reveal" data-media-url="{{ proj.media_file.url }}"
+      data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
+      onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
+
+      <div class="card-media">
+        {% if proj.is_video %}
+        <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
+        {% else %}
+        <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title }}">
+        {% endif %}
+        <div class="media-zoom-overlay">
+          <div class="play-ring"><i class="ti ti-zoom-in" style="font-size:18px; color:#fff;"></i></div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-category">{{ proj.category|default:"Galeria Especial" }}</span>
+          {% if proj.client_name %}<span style="font-size:0.68rem; color:var(--text-dim);">{{ proj.client_name
+            }}</span>{% endif %}
+        </div>
+        <h4 class="card-title">
+          {{ proj.title|default:"Obra Selecionada" }}
+          <i class="ti ti-arrow-up-right card-title-arrow"></i>
+        </h4>
+        <p class="card-desc">{{ proj.description|default:"Projeto pertencente a esta coleção exclusiva do estúdio." }}
+        </p>
+      </div>
+
+    </div>
+    {% empty %}
+    <p style="padding: 0 3.5rem; color: var(--text-dim); font-style: italic;">Ainda sem obras vinculadas a esta galeria
+      específica no painel Admin.</p>
+    {% endfor %}
+  </div>
+
+  {% else %}
+  <div class="gallery-asym-grid">
+    {% for proj in custom_gal.projects.all %}
+    <div class="proj-card gsap-reveal" data-media-url="{{ proj.media_file.url }}"
+      data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
+      onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
+
+      <div
+        class="card-media {% if forloop.first or forloop.counter0|divisibleby:3 %}card-media-asym-large{% else %}card-media-asym-small{% endif %}">
+        {% if proj.is_video %}
+        <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
+        {% else %}
+        <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title }}">
+        {% endif %}
+        <div class="media-zoom-overlay">
+          <div class="play-ring"><i class="ti ti-zoom-in" style="font-size:20px; color:#fff;"></i></div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-category">{{ proj.category|default:"Destaque Temático" }}</span>
+        </div>
+        <h4 class="card-title" style="font-size:1.3rem;">
+          {{ proj.title|default:"Peça Conceitual" }}
+          <i class="ti ti-arrow-up-right card-title-arrow"></i>
+        </h4>
+        <p class="card-desc">{{ proj.description }}</p>
+      </div>
+
+    </div>
+    {% empty %}
+    <p style="padding: 0 3.5rem; color: var(--text-dim); font-style: italic;">Galeria assimétrica sem obras atribuídas
+      ainda.</p>
+    {% endfor %}
+  </div>
+  {% endif %}
 
   {% endfor %}
 
@@ -588,24 +646,23 @@
       </div>
       <span class="sec-sub">Amostras Cinematográficas de Loop</span>
     </div>
-    
+
     <div class="reel-strip">
       {% for proj in reels %}
-        <div class="reel-card gsap-reveal"
-          data-media-url="{{ proj.media_file.url }}"
-          data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
-          onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
-          {% if proj.is_video %}
-            <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
-          {% else %}
-            <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title|default:'Clip' }}">
-          {% endif %}
-          <div class="ri-overlay">
-            <span class="ri-title">{{ proj.title|default:"Clip de Animação" }}</span>
-          </div>
-          <span class="ri-num">0{{ forloop.counter }}</span>
-          <div class="reel-play-btn"><i class="ti ti-player-play-filled" style="font-size:16px;"></i></div>
+      <div class="reel-card gsap-reveal" data-media-url="{{ proj.media_file.url }}"
+        data-media-type="{% if proj.is_video %}video{% else %}image{% endif %}"
+        onclick="openLightbox(this.dataset.mediaUrl, this.dataset.mediaType)">
+        {% if proj.is_video %}
+        <video src="{{ proj.media_file.url }}" autoplay muted loop playsinline aria-label="{{ proj.title }}"></video>
+        {% else %}
+        <img src="{{ proj.media_file.url }}" loading="lazy" alt="{{ proj.title|default:'Clip' }}">
+        {% endif %}
+        <div class="ri-overlay">
+          <span class="ri-title">{{ proj.title|default:"Clip de Animação" }}</span>
         </div>
+        <span class="ri-num">0{{ forloop.counter }}</span>
+        <div class="reel-play-btn"><i class="ti ti-player-play-filled" style="font-size:16px;"></i></div>
+      </div>
       {% endfor %}
     </div>
   </section>
@@ -614,7 +671,7 @@
        COMPETÊNCIAS & PROCESSO CRIATIVO
        ══════════════════════════════════════════════════ -->
   <section class="skills-section" id="skills">
-    
+
     <div class="skills-column gsap-reveal">
       <div class="sec-title-wrap" style="margin-bottom:1rem;">
         <span class="sec-tag">Stack Criativo</span>
@@ -622,28 +679,37 @@
       </div>
       <div>
         {% for tool in tools %}
-          <div class="skill-row">
-            <div class="skill-top">
-              <span class="skill-name">{{ tool.name }}</span>
-              <span class="skill-pct">{{ tool.percentage }}%</span>
-            </div>
-            <div class="track">
-              <div class="fill" style="width:{{ tool.percentage }}%"></div>
-            </div>
+        <div class="skill-row">
+          <div class="skill-top">
+            <span class="skill-name">{{ tool.name }}</span>
+            <span class="skill-pct">{{ tool.percentage }}%</span>
           </div>
+          <div class="track">
+            <div class="fill" style="width:{{ tool.percentage }}%"></div>
+          </div>
+        </div>
         {% empty %}
-          <div class="skill-row">
-            <div class="skill-top"><span class="skill-name">Adobe Illustrator &amp; Vetor</span><span class="skill-pct">95%</span></div>
-            <div class="track"><div class="fill" style="width:95%"></div></div>
+        <div class="skill-row">
+          <div class="skill-top"><span class="skill-name">Adobe Illustrator &amp; Vetor</span><span
+              class="skill-pct">95%</span></div>
+          <div class="track">
+            <div class="fill" style="width:95%"></div>
           </div>
-          <div class="skill-row">
-            <div class="skill-top"><span class="skill-name">Adobe Photoshop &amp; Pintura Digital</span><span class="skill-pct">90%</span></div>
-            <div class="track"><div class="fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-top"><span class="skill-name">Adobe Photoshop &amp; Pintura Digital</span><span
+              class="skill-pct">90%</span></div>
+          <div class="track">
+            <div class="fill" style="width:90%"></div>
           </div>
-          <div class="skill-row">
-            <div class="skill-top"><span class="skill-name">Motion Design &amp; After Effects</span><span class="skill-pct">85%</span></div>
-            <div class="track"><div class="fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-top"><span class="skill-name">Motion Design &amp; After Effects</span><span
+              class="skill-pct">85%</span></div>
+          <div class="track">
+            <div class="fill" style="width:85%"></div>
           </div>
+        </div>
         {% endfor %}
       </div>
     </div>
@@ -655,35 +721,38 @@
       </div>
       <div class="process-list">
         {% for step in creative_steps %}
-          <div class="process-item">
-            <span class="p-num">{{ step.step_number }}</span>
-            <div class="p-content">
-              <p class="p-title">{{ step.title }}</p>
-              <p class="p-desc">{{ step.description }}</p>
-            </div>
+        <div class="process-item">
+          <span class="p-num">{{ step.step_number }}</span>
+          <div class="p-content">
+            <p class="p-title">{{ step.title }}</p>
+            <p class="p-desc">{{ step.description }}</p>
           </div>
+        </div>
         {% empty %}
-          <div class="process-item">
-            <span class="p-num">01</span>
-            <div class="p-content">
-              <p class="p-title">Imersão &amp; Pesquisa de Mercado</p>
-              <p class="p-desc">Análise aprofundada da essência da marca, concorrência e público-alvo para definir um direcionamento conceptual sólido e original.</p>
-            </div>
+        <div class="process-item">
+          <span class="p-num">01</span>
+          <div class="p-content">
+            <p class="p-title">Imersão &amp; Pesquisa de Mercado</p>
+            <p class="p-desc">Análise aprofundada da essência da marca, concorrência e público-alvo para definir um
+              direcionamento conceptual sólido e original.</p>
           </div>
-          <div class="process-item">
-            <span class="p-num">02</span>
-            <div class="p-content">
-              <p class="p-title">Design, Prototipagem &amp; Refinamento</p>
-              <p class="p-desc">Criação de sistemas visuais escaláveis e ilustrações sob medida, polindo cada curva, cor e tipografia até alcançar excelência visual.</p>
-            </div>
+        </div>
+        <div class="process-item">
+          <span class="p-num">02</span>
+          <div class="p-content">
+            <p class="p-title">Design, Prototipagem &amp; Refinamento</p>
+            <p class="p-desc">Criação de sistemas visuais escaláveis e ilustrações sob medida, polindo cada curva, cor e
+              tipografia até alcançar excelência visual.</p>
           </div>
-          <div class="process-item">
-            <span class="p-num">03</span>
-            <div class="p-content">
-              <p class="p-title">Entrega de Manuais &amp; Assets Finais</p>
-              <p class="p-desc">Disponibilização de todos os formatos vetoriais, guias de aplicação da marca e otimização digital para garantir coerência global.</p>
-            </div>
+        </div>
+        <div class="process-item">
+          <span class="p-num">03</span>
+          <div class="p-content">
+            <p class="p-title">Entrega de Manuais &amp; Assets Finais</p>
+            <p class="p-desc">Disponibilização de todos os formatos vetoriais, guias de aplicação da marca e otimização
+              digital para garantir coerência global.</p>
           </div>
+        </div>
         {% endfor %}
       </div>
     </div>
@@ -694,18 +763,20 @@
        CTA / CONTACTO (PREMIUM SECTION)
        ══════════════════════════════════════════════════ -->
   <section class="cta-block" id="contacto">
-    <img src="/media/projects_media/Assunto.png" alt="imagem em png" class="cta-image">
+
     <div class="gsap-reveal">
       <span class="sec-tag" style="color:#a5beff; margin-bottom:12px; display:inline-block;">Próximo Passo</span>
       <h2 class="cta-title">{{ setting.cta_title|default:"Pronto para dar vida<br>ao seu próximo projeto?"|safe }}</h2>
-      <p class="cta-sub">{{ setting.cta_subtitle|default:"Estou atualmente disponível para projetos freelance, novas marcas e parcerias criativas que valorizem design memorável e detalhista." }}</p>
+      <p class="cta-sub">{{ setting.cta_subtitle|default:"Estou atualmente disponível para projetos freelance, novas
+        marcas e parcerias criativas que valorizem design memorável e detalhista." }}</p>
     </div>
     <div class="cta-action gsap-reveal">
       {% if setting.whatsapp_number %}
-        <a href="https://wa.me/{{ setting.whatsapp_number }}" target="_blank" rel="noopener noreferrer" class="btn-dark" style="margin-bottom:6px; background:#14532d; border-color:#22c55e;">
-          <i class="ti ti-brand-whatsapp" style="font-size:1.35rem; color:#4ade80;"></i>
-          Conversar no WhatsApp
-        </a>
+      <a href="https://wa.me/{{ setting.whatsapp_number }}" target="_blank" rel="noopener noreferrer" class="btn-dark"
+        style="margin-bottom:6px; background:#14532d; border-color:#22c55e;">
+        <i class="ti ti-brand-whatsapp" style="font-size:1.35rem; color:#4ade80;"></i>
+        Conversar no WhatsApp
+      </a>
       {% endif %}
       <a href="mailto:{{ setting.contact_email|default:'fredy.segunda@email.com' }}" class="btn-dark">
         <i class="ti ti-mail" style="font-size:1.3rem;"></i>
@@ -713,35 +784,43 @@
       </a>
       <p class="cta-email">{{ setting.contact_email|default:'fredy.segunda@email.com' }}</p>
     </div>
+    <img src="/media/projects_media/0d2d85e6-9da8-4b6e-b5c1-aea169e4cf4a.JPG" alt="imagem em png" class="cta-image">
+
+    <div class="cta-image-wrap">
+      <img src="/media/projects_media/0d2d85e6-9da8-4b6e-b5c1-aea169e4cf4a.JPG" alt="" class="cta-image">
+    </div>
   </section>
 
   <!-- ── FOOTER ── -->
   <footer>
-    <span class="f-name">Fredy Segunda &copy; {{ setting.hero_year|default:"2026" }} — Direção Criativa &amp; Design Gráfico. Todos os direitos reservados.</span>
+    <span class="f-name">Fredy Segunda &copy; {{ setting.hero_year|default:"2026" }} — Direção Criativa &amp; Design
+      Gráfico. Todos os direitos reservados.</span>
     <div class="f-links">
       {% if setting.link_behance and setting.link_behance != "#" %}
-        <a href="{{ setting.link_behance }}" class="f-link" target="_blank" rel="noopener noreferrer">Behance</a>
+      <a href="{{ setting.link_behance }}" class="f-link" target="_blank" rel="noopener noreferrer">Behance</a>
       {% endif %}
       {% if setting.link_dribbble and setting.link_dribbble != "#" %}
-        <a href="{{ setting.link_dribbble }}" class="f-link" target="_blank" rel="noopener noreferrer">Dribbble</a>
+      <a href="{{ setting.link_dribbble }}" class="f-link" target="_blank" rel="noopener noreferrer">Dribbble</a>
       {% endif %}
       {% if setting.link_instagram and setting.link_instagram != "#" %}
-        <a href="{{ setting.link_instagram }}" class="f-link" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="{{ setting.link_instagram }}" class="f-link" target="_blank" rel="noopener noreferrer">Instagram</a>
       {% endif %}
       {% if setting.link_linkedin and setting.link_linkedin != "#" %}
-        <a href="{{ setting.link_linkedin }}" class="f-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="{{ setting.link_linkedin }}" class="f-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       {% endif %}
       {% if setting.link_github and setting.link_github != "#" %}
-        <a href="{{ setting.link_github }}" class="f-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="{{ setting.link_github }}" class="f-link" target="_blank" rel="noopener noreferrer">GitHub</a>
       {% endif %}
       <a href="#inicio" class="f-link" title="Voltar ao Topo">Topo &uarr;</a>
     </div>
   </footer>
 
   <!-- ── LIGHTBOX CINEMÁTICO ── -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)" role="dialog" aria-modal="true" aria-label="Visualização em ecrã completo">
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)" role="dialog" aria-modal="true"
+    aria-label="Visualização em ecrã completo">
     <div class="lb-inner">
-      <button class="lb-close" onclick="document.getElementById('lightbox').classList.remove('open')" aria-label="Fechar visualização">
+      <button class="lb-close" onclick="document.getElementById('lightbox').classList.remove('open')"
+        aria-label="Fechar visualização">
         <i class="ti ti-x"></i>
       </button>
       <img id="lb-img" src="" style="display:none;" alt="Pré-visualização do trabalho">
@@ -754,21 +833,21 @@
 
   <!-- GSAP Animations & Staggers -->
   <script>
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
       if (typeof gsap === 'undefined') return;
       gsap.registerPlugin(ScrollTrigger);
 
       var tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-      tl.to('#hero-badge',       { opacity: 1, y: 0, duration: 0.8 }, 0.15);
+      tl.to('#hero-badge', { opacity: 1, y: 0, duration: 0.8 }, 0.15);
       tl.to('.hero-title-inner', { opacity: 1, y: '0%', duration: 1.1, stagger: 0.12 }, 0.35);
-      tl.to('#hero-meta',        { opacity: 1, y: 0, duration: 0.8 }, 1.05);
-      tl.to('#hero-desc',        { opacity: 1, y: 0, duration: 0.8 }, 1.2);
-      tl.to('#hero-cta',         { opacity: 1, y: 0, duration: 0.8 }, 1.35);
-      tl.to('.hero-social-row',  { opacity: 1, y: 0, duration: 0.8 }, 1.45);
-      tl.to('#hero-stats',       { opacity: 1, y: 0, duration: 0.8 }, 1.55);
+      tl.to('#hero-meta', { opacity: 1, y: 0, duration: 0.8 }, 1.05);
+      tl.to('#hero-desc', { opacity: 1, y: 0, duration: 0.8 }, 1.2);
+      tl.to('#hero-cta', { opacity: 1, y: 0, duration: 0.8 }, 1.35);
+      tl.to('.hero-social-row', { opacity: 1, y: 0, duration: 0.8 }, 1.45);
+      tl.to('#hero-stats', { opacity: 1, y: 0, duration: 0.8 }, 1.55);
 
-      gsap.utils.toArray('.gsap-reveal').forEach(function(el) {
+      gsap.utils.toArray('.gsap-reveal').forEach(function (el) {
         gsap.fromTo(el, { opacity: 0, y: 45 }, {
           opacity: 1, y: 0, duration: 0.85, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 86%', once: true }
@@ -779,17 +858,17 @@
 
   <!-- Menu Mobile Responsive Binding -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       var btn = document.getElementById('nav-hamburger');
       var mob = document.querySelector('.nav-mobile');
       if (btn && mob) {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
           var open = btn.classList.toggle('open');
           mob.classList.toggle('open', open);
           document.body.style.overflow = open ? 'hidden' : '';
         });
-        mob.querySelectorAll('.nav-link').forEach(function(link) {
-          link.addEventListener('click', function() {
+        mob.querySelectorAll('.nav-link').forEach(function (link) {
+          link.addEventListener('click', function () {
             btn.classList.remove('open');
             mob.classList.remove('open');
             document.body.style.overflow = '';
@@ -800,4 +879,5 @@
   </script>
 
 </body>
+
 </html>
