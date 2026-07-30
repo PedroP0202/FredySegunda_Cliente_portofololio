@@ -36,29 +36,10 @@
   <!-- ── STUDIO THEME CUSTOMIZATION FROM ADMIN ── -->
   <style>
     :root {
-      --bg: {
-          {
-          setting.get_effective_bg|default: "#08080c"
-        }
-      }
-
-      ;
-
-        {
-        % if setting.accent_color %
-      }
-
-      --blue: {
-          {
-          setting.accent_color
-        }
-      }
-
-      ;
-
-        {
-        % endif %
-      }
+      --bg: {{ setting.get_effective_bg|default:"#08080c" }};
+      {% if setting.accent_color %}
+      --blue: {{ setting.accent_color }};
+      {% endif %}
     }
   </style>
 </head>
