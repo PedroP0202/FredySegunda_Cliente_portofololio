@@ -174,37 +174,44 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ──────────────────────────────────
-     4. MOBILE HAMBURGER MENU
-     (único — removido duplicado inline)
+     4. MENU LATERAL HAMBURGER
      ────────────────────────────────── */
   const hamburger = document.querySelector('.nav-hamburger');
   const mobileNav = document.querySelector('.nav-mobile');
+  const backdrop  = document.getElementById('nav-backdrop');
+
+  function openMenu() {
+    hamburger.classList.add('open');
+    mobileNav.classList.add('open');
+    if (backdrop) backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
 
   if (hamburger && mobileNav) {
     hamburger.addEventListener('click', () => {
-      const isOpen = hamburger.classList.toggle('open');
-      mobileNav.classList.toggle('open', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-      hamburger.setAttribute('aria-expanded', isOpen);
+      hamburger.classList.contains('open') ? closeMenu() : openMenu();
     });
 
+    // Fechar ao clicar num link
     mobileNav.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileNav.classList.remove('open');
-        document.body.style.overflow = '';
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
+      link.addEventListener('click', closeMenu);
     });
+
+    // Fechar ao clicar no backdrop
+    if (backdrop) backdrop.addEventListener('click', closeMenu);
 
     // Fechar com ESC
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && hamburger.classList.contains('open')) {
-        hamburger.classList.remove('open');
-        mobileNav.classList.remove('open');
-        document.body.style.overflow = '';
-        hamburger.setAttribute('aria-expanded', 'false');
-      }
+      if (e.key === 'Escape' && hamburger.classList.contains('open')) closeMenu();
     });
   }
 
