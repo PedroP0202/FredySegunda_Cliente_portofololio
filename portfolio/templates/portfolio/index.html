@@ -106,22 +106,9 @@
     </a>
   </aside>
 
-  <!-- ── MOBILE NAV OVERLAY ── -->
-  <div class="nav-mobile" aria-label="Menu Mobile">
-    <a class="nav-link" href="#trabalho">Showcase</a>
-    <a class="nav-link" href="#galeria">Criações</a>
-    {% for custom_gal in custom_galleries %}
-    <a class="nav-link" href="#gal-{{ custom_gal.id }}">{{ custom_gal.name|truncatewords:2 }}</a>
-    {% endfor %}
-    <a class="nav-link" href="#reel">Reel</a>
-    <a class="nav-link" href="#skills">Stack</a>
-    <a class="nav-link" href="#contacto">Contacto</a>
-  </div>
-
-  <!-- ── NAVBAR ── -->
-  <nav>
-    <a href="#inicio" class="logo">Fredy<span>.</span>Segunda</a>
-    <div class="nav-right">
+  <!-- ── MENU OVERLAY (HAMBURGER) ── -->
+  <div class="nav-mobile" aria-label="Menu de Navegação">
+    <div class="nav-mobile-links">
       <a class="nav-link" href="#trabalho">Showcase</a>
       <a class="nav-link" href="#galeria">Criações</a>
       {% for custom_gal in custom_galleries %}
@@ -130,34 +117,53 @@
       <a class="nav-link" href="#reel">Reel</a>
       <a class="nav-link" href="#skills">Stack</a>
       <a class="nav-link" href="#contacto">Contacto</a>
+    </div>
 
-      <!-- Quick Social Icons on Header -->
-      <div class="nav-socials" aria-label="Redes no Topo">
-        {% if setting.link_behance and setting.link_behance != "#" %}
-        <a href="{{ setting.link_behance }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn"
-          title="Behance">
-          <i class="ti ti-brand-behance"></i>
-        </a>
-        {% endif %}
-        {% if setting.link_dribbble and setting.link_dribbble != "#" %}
-        <a href="{{ setting.link_dribbble }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn"
-          title="Dribbble">
-          <i class="ti ti-brand-dribbble"></i>
-        </a>
-        {% endif %}
-      </div>
-
-      <a href="#contacto" class="nav-dot-wrap" title="Status de Agenda &amp; Colaborações">
+    <!-- Disponibilidade + Sociais no overlay -->
+    <div class="nav-mobile-footer">
+      <a href="#contacto" class="nav-mobile-dot-wrap nav-link">
         {% if setting.is_available or setting.is_available is None %}
         <div class="nav-dot"></div>
-        <span>Disponível</span>
+        <span>Disponível para Projetos</span>
         {% else %}
         <div class="nav-dot" style="background:#ef4444; box-shadow: 0 0 10px #ef4444;"></div>
         <span>Em Projeto</span>
         {% endif %}
       </a>
+      <div class="nav-mobile-socials">
+        {% if setting.link_behance and setting.link_behance != "#" %}
+        <a href="{{ setting.link_behance }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn" title="Behance"><i class="ti ti-brand-behance"></i></a>
+        {% endif %}
+        {% if setting.link_dribbble and setting.link_dribbble != "#" %}
+        <a href="{{ setting.link_dribbble }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn" title="Dribbble"><i class="ti ti-brand-dribbble"></i></a>
+        {% endif %}
+        {% if setting.link_instagram and setting.link_instagram != "#" %}
+        <a href="{{ setting.link_instagram }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn" title="Instagram"><i class="ti ti-brand-instagram"></i></a>
+        {% endif %}
+        {% if setting.link_linkedin and setting.link_linkedin != "#" %}
+        <a href="{{ setting.link_linkedin }}" target="_blank" rel="noopener noreferrer" class="nav-soc-btn" title="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
+        {% endif %}
+      </div>
     </div>
-    <div class="nav-hamburger" id="nav-hamburger" aria-label="Abrir Menu">
+  </div>
+
+  <!-- ── NAVBAR ── -->
+  <nav>
+    <a href="#inicio" class="logo">Fredy<span>.</span>Segunda</a>
+
+    <!-- Status de disponibilidade (visível na nav) -->
+    <a href="#contacto" class="nav-dot-wrap" title="Status de Agenda &amp; Colaborações">
+      {% if setting.is_available or setting.is_available is None %}
+      <div class="nav-dot"></div>
+      <span>Disponível</span>
+      {% else %}
+      <div class="nav-dot" style="background:#ef4444; box-shadow: 0 0 10px #ef4444;"></div>
+      <span>Em Projeto</span>
+      {% endif %}
+    </a>
+
+    <!-- Botão Hamburger (sempre visível) -->
+    <div class="nav-hamburger" id="nav-hamburger" aria-label="Abrir Menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
