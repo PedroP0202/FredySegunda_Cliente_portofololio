@@ -435,27 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
-    // ── Hero entrance timeline ──
-    if (prefersReducedMotion) {
-      // Tornar visível imediatamente sem animação
-      document.querySelectorAll(
-        '#hero-badge, .hero-title-inner, #hero-meta, #hero-desc, #hero-cta, .hero-social-row, #hero-stats'
-      ).forEach(el => {
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      });
-    } else {
-      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-      tl.to('#hero-badge',        { opacity: 1, y: 0, duration: 0.8 }, 0.15);
-      tl.to('.hero-title-inner',  { opacity: 1, y: '0%', duration: 1.1, stagger: 0.12 }, 0.35);
-      tl.to('#hero-meta',         { opacity: 1, y: 0, duration: 0.8 }, 1.05);
-      tl.to('#hero-desc',         { opacity: 1, y: 0, duration: 0.8 }, 1.2);
-      tl.to('#hero-cta',          { opacity: 1, y: 0, duration: 0.8 }, 1.35);
-      tl.to('.hero-social-row',   { opacity: 1, y: 0, duration: 0.8 }, 1.45);
-      tl.to('#hero-stats',        { opacity: 1, y: 0, duration: 0.8 }, 1.55);
-    }
-
-    // ── Scroll reveal para cards e secções ──
+    // Se preferir movimento reduzido: apenas tornar visível sem animação
     if (prefersReducedMotion) {
       document.querySelectorAll('.gsap-reveal').forEach(el => {
         el.style.opacity = '1';

@@ -16,17 +16,24 @@
   <meta property="og:type" content="website">
   <title>{{ setting.site_title|default:"Fredy Segunda — Direção Criativa &amp; Design Gráfico" }}</title>
 
+  <!-- Preload critical assets -->
+  <link rel="preload" href="{% static 'portfolio/css/style.css' %}" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@400;500;600&display=swap" as="style" crossorigin>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Outfit:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  </noscript>
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
-  <!-- GSAP -->
+  <!-- GSAP (carregado antes do script.js via defer) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 
@@ -786,66 +793,21 @@
 
   <!-- ── LIGHTBOX CINEMÁTICO ── -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)" role="dialog" aria-modal="true"
-    aria-label="Visualização em ecrã completo">
+    aria-labelledby="lb-title" aria-label="Visualização em ecrã completo">
     <div class="lb-inner">
-      <button class="lb-close" onclick="document.getElementById('lightbox').classList.remove('open')"
+      <button type="button" class="lb-close"
+        onclick="document.getElementById('lightbox').classList.remove('open'); document.getElementById('lb-vid').pause(); document.getElementById('lb-vid').src='';"
         aria-label="Fechar visualização">
         <i class="ti ti-x"></i>
       </button>
+      <span id="lb-title" class="visually-hidden">Pré-visualização do trabalho</span>
       <img id="lb-img" src="" style="display:none;" alt="Pré-visualização do trabalho">
-      <video id="lb-vid" src="" controls style="display:none;"></video>
+      <video id="lb-vid" src="" controls style="display:none;" aria-label="Vídeo em destaque"></video>
     </div>
   </div>
 
   <!-- ── SCRIPTS ── -->
   <script src="{% static 'portfolio/js/script.js' %}" defer></script>
-
-  <!-- GSAP Animations & Staggers -->
-  <script>
-    window.addEventListener('load', function () {
-      if (typeof gsap === 'undefined') return;
-      gsap.registerPlugin(ScrollTrigger);
-
-      var tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-
-      tl.to('#hero-badge', { opacity: 1, y: 0, duration: 0.8 }, 0.15);
-      tl.to('.hero-title-inner', { opacity: 1, y: '0%', duration: 1.1, stagger: 0.12 }, 0.35);
-      tl.to('#hero-meta', { opacity: 1, y: 0, duration: 0.8 }, 1.05);
-      tl.to('#hero-desc', { opacity: 1, y: 0, duration: 0.8 }, 1.2);
-      tl.to('#hero-cta', { opacity: 1, y: 0, duration: 0.8 }, 1.35);
-      tl.to('.hero-social-row', { opacity: 1, y: 0, duration: 0.8 }, 1.45);
-      tl.to('#hero-stats', { opacity: 1, y: 0, duration: 0.8 }, 1.55);
-
-      gsap.utils.toArray('.gsap-reveal').forEach(function (el) {
-        gsap.fromTo(el, { opacity: 0, y: 45 }, {
-          opacity: 1, y: 0, duration: 0.85, ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 86%', once: true }
-        });
-      });
-    });
-  </script>
-
-  <!-- Menu Mobile Responsive Binding -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var btn = document.getElementById('nav-hamburger');
-      var mob = document.querySelector('.nav-mobile');
-      if (btn && mob) {
-        btn.addEventListener('click', function () {
-          var open = btn.classList.toggle('open');
-          mob.classList.toggle('open', open);
-          document.body.style.overflow = open ? 'hidden' : '';
-        });
-        mob.querySelectorAll('.nav-link').forEach(function (link) {
-          link.addEventListener('click', function () {
-            btn.classList.remove('open');
-            mob.classList.remove('open');
-            document.body.style.overflow = '';
-          });
-        });
-      }
-    });
-  </script>
 
 </body>
 
